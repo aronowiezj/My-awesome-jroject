@@ -19,8 +19,9 @@ public class Card {
 		this.buffs = 0;
 	}
 
-	public void attack(Card card) {
-
+	public void attack(Card targetCard) {
+		targetCard.setHitPoints(getPower());
+		setHitPoints(targetCard.getPower());
 	}
 
 	public int getPower() {
@@ -41,6 +42,11 @@ public class Card {
 	
 	public String getName() {
 		return name;
+	}
+	
+	@Override
+	public String toString() {
+		return name + " : " + getPower() + " - " + hitPoints;
 	}
 
 }
