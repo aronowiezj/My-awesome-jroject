@@ -1,4 +1,4 @@
-package view;
+package ayou.view;
 
 import ayou.model.Card;
 
