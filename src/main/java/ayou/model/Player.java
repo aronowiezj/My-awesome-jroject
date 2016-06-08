@@ -46,6 +46,8 @@ public class Player {
 	public void play(Card card) {
 		hand.removeCard(card);
 		board.addCard(card);
+		
+		card.invocation();
 	}
 
 	// deprecated
