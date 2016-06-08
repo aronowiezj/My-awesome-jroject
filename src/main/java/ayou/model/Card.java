@@ -5,6 +5,9 @@ package ayou.model;
  *
  */
 public class Card {
+	
+	public static final int IMG_SIZE_X = 30;
+	public static final int IMG_SIZE_Y = 30;
 
 	private final int ID_CARD;
 	private String name;
