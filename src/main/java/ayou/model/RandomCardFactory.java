@@ -20,7 +20,7 @@ public class RandomCardFactory {
 		    stringBuilder.append(c);
 		}
 		String name = stringBuilder.toString();
-		return new Card(null, name,null,(int)(Math.random()*10+1),(int)(Math.random()*10+1), true,false,0,false,0,false,0,false);
+		return new Card(0, name,null,(int)(Math.random()*10+1),(int)(Math.random()*10+1), true,false,0,false,0,false,0,false);
 	}
 
 	/**
