@@ -25,13 +25,16 @@ public class Card {
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
 
-	public Card(int power, int hitPoints, String name) {
+	public Card(int idCard, String name, String idImg, int power, int powerBuff, int maxHitPoints, int hitPoints,
+			int lifeBuffs, boolean canAtk, boolean celerity, int healAlly, boolean healAllAllies, 
+			int buffAlly, boolean buffAllAllies, int debuffEnemy, boolean debuffAllEnemies) {
+		this.ID_CARD=idCard;
+		this.name = name;
+		this.ID_IMG="test";
 		this.POWER = power;
 		this.MAX_HIT_POINTS = hitPoints;
 		this.hitPoints = hitPoints;
 		this.name = name;
-		ID_CARD = 0;
-		ID_IMG = "test";
 		powerBuffs = 0;
 		lifeBuffs = 0;
 		canAttack = true;
@@ -42,6 +45,16 @@ public class Card {
 		buffAllAllies = false;
 		debuffEnemy = 0;
 		debuffAllEnemies = false;
+		this.powerBuffs = powerBuff;
+		this.lifeBuffs = lifeBuffs;
+		this.canAttack=canAtk;
+		this.celerity=celerity;
+		this.healAlly=healAlly;
+		this.healAllAllies=healAllAllies;
+		this.buffAlly=buffAlly;
+		this.buffAllAllies=buffAllAllies;
+		this.debuffEnemy=debuffEnemy;
+		this.debuffAllEnemies=debuffAllEnemies;
 	}
 
 	public void attack(Card targetCard) {
@@ -75,7 +88,6 @@ public class Card {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
-
 	public void getHealed(int heal) {
 		if (this.hitPoints + heal < this.MAX_HIT_POINTS) {
 			hitPoints += heal;
@@ -130,5 +142,4 @@ public class Card {
 		}
 
 	}
-
 }

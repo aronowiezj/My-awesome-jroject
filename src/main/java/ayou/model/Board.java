@@ -38,7 +38,9 @@ public class Board {
 	// deprecated
 	public Card getBattler() {
 		if (cardList.isEmpty())
-			return new Card(0, 0, "error");
+		{
+			return null;
+		}
 		return cardList.get(0);
 	}
 
