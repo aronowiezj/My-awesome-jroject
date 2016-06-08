@@ -58,6 +58,7 @@ public class Card {
 		this.buffAllAllies = buffAllAllies;
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
+		canAttack = celerity;
 	}
 
 	public int getCardID() {
@@ -69,6 +70,14 @@ public class Card {
 			targetCard.setHitPoints(getPower());
 			setHitPoints(targetCard.getPower());
 		}
+	}
+	
+	public boolean canAttaque(){
+		return canAttack;
+	}
+	
+	public void nowCanAttaque(boolean canAttack){
+		this.canAttack=canAttack;
 	}
 
 	public int getPower() {

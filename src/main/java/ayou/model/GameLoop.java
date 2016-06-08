@@ -24,12 +24,12 @@ public class GameLoop extends Thread {
 		}
 		return instance;
 	}
-	
-	public Player getPlayer1(){
+
+	public Player getPlayer1() {
 		return player1;
 	}
-	
-	public Player getPlayer2(){
+
+	public Player getPlayer2() {
 		return player2;
 	}
 
@@ -89,10 +89,62 @@ public class GameLoop extends Thread {
 	// System.out.println(enemy + " " + enemy.getShield());
 	// }
 	private void doTurn(Player player, Player enemy) {
+		// logger.debug(player.toString() + " vs " + enemy.toString());
 		player.draw();
-		while (true) {
-			System.out.println("lol");
+		// logger.debug("hand : " + Displayer.buildCards(player.getHand()));
+
+		System.out.println(player + " hand :");
+		Displayer.display(player.getHand());
+		System.out.println();
+
+		System.out.println("Quelle carte jouer?");
+		player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
+
+		System.out.println(player + " board :");
+		System.out.println(player.getBoard());
+		if (!enemy.isBoardEmpty()) {
+			System.out.println(enemy + " board :");
+			System.out.println(enemy.getBattler());
 		}
+		System.out.println();
+
+		// if (!enemy.isBoardEmpty()) {
+		//
+		// player.invoke(player.getHand().get(Integer.parseInt(new
+		// Scanner(System.in).nextLine()) - 1));
+		// player.getBattler().attack(enemy.getBattler());
+		// Displayer.attackCard(player.getBattler(), enemy.getBattler());
+		// if (player.getBattler().getHitPoints() <= 0) {
+		// player.takeDamages(1);
+		// Displayer.die(player.getBattler());
+		// player.cleanBoard();
+		// }
+		// if (enemy.getBattler().getHitPoints() <= 0) {
+		// enemy.takeDamages(1);
+		// Displayer.die(enemy.getBattler());
+		// enemy.cleanBoard();
+		// }
+		// }
+		for (Card c : player.getBoard()) {
+			//if (c.isCanAttack()) {
+				System.out.println("Qui attaquer? 0 pour le héros");
+				int cible = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
+				if (cible >= 0) {
+					if (cible < enemy.getBoard().size()) {
+						c.attack(enemy.getBoard().get(cible));
+					}
+
+				} else {
+					enemy.takeDamages(1);
+				}
+			//} else {
+			//	c.setCanAttack(true);
+			//}
+
+		}
+		System.out.println(player + "    " + player.getShield());
+		System.out.println(enemy + "    " + enemy.getShield());
+
 	}
 
 	private void startDraw(Player player) {
