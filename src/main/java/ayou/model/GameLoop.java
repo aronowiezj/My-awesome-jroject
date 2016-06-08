@@ -26,7 +26,7 @@ public class GameLoop {
 			if (cardPlayer2 == null)
 				cardPlayer2 = deck2.draw();
 
-			Displayer.putCard(cardPlayer1, cardPlayer2);
+			//Displayer.putCard(cardPlayer1, cardPlayer2);
 
 			try {
 				Thread.sleep(1000);
@@ -36,7 +36,7 @@ public class GameLoop {
 
 			cardPlayer1.attack(cardPlayer2);
 
-			Displayer.attackCard(cardPlayer1, cardPlayer2);
+			//Displayer.attackCard(cardPlayer1, cardPlayer2);
 
 			try {
 				Thread.sleep(1000);
@@ -45,11 +45,11 @@ public class GameLoop {
 			}
 
 			if (cardPlayer1.getHitPoints() <= 0) {
-				Displayer.die(cardPlayer1);
+				//Displayer.die(cardPlayer1);
 				cardPlayer1 = null;
 			}
 			if (cardPlayer2.getHitPoints() <= 0) {
-				Displayer.die(cardPlayer2);
+				//Displayer.die(cardPlayer2);
 				cardPlayer2 = null;
 			}
 
@@ -59,8 +59,8 @@ public class GameLoop {
 				e.printStackTrace();
 			}
 
-			System.out.println("p1 : " + deck1.getRemainingCards() + " cards remain");
-			System.out.println("p2 : " + deck2.getRemainingCards() + " cards remain");
+			//System.out.println("p1 : " + deck1.getRemainingCards() + " cards remain");
+			//System.out.println("p2 : " + deck2.getRemainingCards() + " cards remain");
 
 			try {
 				Thread.sleep(1000);
