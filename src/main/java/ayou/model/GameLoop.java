@@ -8,10 +8,12 @@ public class GameLoop {
 
 	static public int DECK_SIZE = 40;
 	static public int START_HAND_SIZE = 5;
-
+	static Player player1;
+	static Player player2;
+	
 	public GameLoop() {
-		Player player1 = new Player("Player1");
-		Player player2 = new Player("Player2");
+		player1 = new Player("Player1");
+		player2 = new Player("Player2");
 
 		startDraw(player1);
 		startDraw(player2);
@@ -36,7 +38,7 @@ public class GameLoop {
 		System.out.println();
 
 		if (player.isBoardEmpty())
-			player.play(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
+			player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
 
 		System.out.println(player + " board :");
 		System.out.println(player.getBattler());
