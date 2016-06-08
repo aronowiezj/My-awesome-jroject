@@ -57,6 +57,10 @@ public class Card {
 		this.debuffAllEnemies=debuffAllEnemies;
 	}
 
+	public int getCardID() {
+		return ID_CARD;
+	}
+
 	public void attack(Card targetCard) {
 		if (canAttack) {
 			targetCard.setHitPoints(getPower());
