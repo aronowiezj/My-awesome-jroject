@@ -17,7 +17,7 @@ public class Main {
 	}
 
 	public static void run() {
-		new GameLoop();
+		new Thread(new GameLoop()).run();
 	}
 
 }

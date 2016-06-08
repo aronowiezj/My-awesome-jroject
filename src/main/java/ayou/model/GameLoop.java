@@ -2,16 +2,21 @@ package ayou.model;
 
 import java.util.Scanner;
 
-import ayou.view.Displayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class GameLoop {
+import ayou.view.Background;
+
+public class GameLoop implements Runnable {
 
 	static public int DECK_SIZE = 40;
 	static public int START_HAND_SIZE = 5;
 	static Player player1;
 	static Player player2;
+	final static Logger logger = LoggerFactory.getLogger(GameLoop.class);
+
 	
-	public GameLoop() {
+	public void run() {
 		player1 = new Player("Player1");
 		player2 = new Player("Player2");
 
@@ -66,6 +71,39 @@ public class GameLoop {
 //		System.out.println(enemy + "    " + enemy.getShield());
 //	}
 	private void doTurn(Player player, Player enemy){
+		logger.debug(player1.toString() + " vs " + enemy.toString());
+		player.draw();
+//		System.out.println(player + " hand :");
+//		Displayer.display(player.getHand());
+//		System.out.println();
+//
+		if (player.isBoardEmpty());
+			player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
+
+//		System.out.println(player + " board :");
+//		System.out.println(player.getBattler());
+//		if (!enemy.isBoardEmpty()) {
+////			System.out.println(enemy + " board :");
+////			System.out.println(enemy.getBattler());
+//		}
+//		System.out.println();
+//
+//		if (!enemy.isBoardEmpty()) {
+//			player.getBattler().attack(enemy.getBattler());
+////			Displayer.attackCard(player.getBattler(), enemy.getBattler());
+//			if (player.getBattler().getHitPoints() <= 0) {
+//				player.takeDamages(1);
+////				Displayer.die(player.getBattler());
+//				player.cleanBoard();
+//			}
+//			if (enemy.getBattler().getHitPoints() <= 0) {
+//				enemy.takeDamages(1);
+////				Displayer.die(enemy.getBattler());
+//				enemy.cleanBoard();
+//			}
+//		}
+//		System.out.println(player + "    " + player.getShield());
+//		System.out.println(enemy + "    " + enemy.getShield());
 		
 	}
 	
