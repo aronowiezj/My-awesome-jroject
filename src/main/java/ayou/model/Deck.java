@@ -28,9 +28,15 @@ public class Deck {
 	}
 
 	public Card draw() {
-		Card cardDrawn = cardList.get(0);
-		cardList.remove(0);
-		return cardDrawn;
+		if(!cardList.isEmpty()){
+			Card cardDrawn = cardList.get(0);
+			cardList.remove(0);
+			return cardDrawn;
+		}
+		else {
+			System.err.println("PLUS DE CARTES SALOPE LOL");
+			return null;
+		}
 	}
 
 	public boolean isEmpty() {

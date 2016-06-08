@@ -18,6 +18,7 @@ public class GameLoop {
 
 		while (!player1.isDefeated() && !player2.isDefeated()) {
 			doTurn(player1, player2);
+			doTurn(player2, player1);
 		}
 
 		if (player1.isDefeated())
@@ -49,14 +50,18 @@ public class GameLoop {
 			player.getBattler().attack(enemy.getBattler());
 			Displayer.attackCard(player.getBattler(), enemy.getBattler());
 			if (player.getBattler().getHitPoints() <= 0) {
+				player.takeDamages(1);
 				Displayer.die(player.getBattler());
 				player.cleanBoard();
 			}
 			if (enemy.getBattler().getHitPoints() <= 0) {
+				enemy.takeDamages(1);
 				Displayer.die(enemy.getBattler());
 				enemy.cleanBoard();
 			}
 		}
+		System.out.println(player + "    " + player.getShield());
+		System.out.println(enemy + "    " + enemy.getShield());
 	}
 
 	private void startDraw(Player player) {

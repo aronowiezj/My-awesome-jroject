@@ -7,29 +7,29 @@ import java.util.List;
  *
  */
 public class Player {
-	
+
 	private Deck deck;
 	private Hand hand;
 	private Board board;
 	private int shieldLevel;
 	private String name;
-	
-	public Player(String name){
+
+	public Player(String name) {
 		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
 		hand = new Hand();
 		board = new Board();
 		this.name = name;
 		shieldLevel = 5;
 	}
-	
+
 	public void draw() {
 		hand.addCard(deck.draw());
 	}
-	
-	public boolean isDefeated(){
-		return /*deck.isEmpty() ||*/ shieldLevel < 0;
+
+	public boolean isDefeated() {
+		return deck.isEmpty() || shieldLevel < 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
@@ -59,6 +59,15 @@ public class Player {
 
 	public List<Card> getBoard() {
 		return board.getCards();
+	}
+
+	public void takeDamages(int damages) {
+		shieldLevel -= damages;
+
+	}
+
+	public int getShield() {
+		return shieldLevel;
 	}
 
 }

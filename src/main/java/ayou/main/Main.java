@@ -11,8 +11,8 @@ public class Main {
 			
 			@Override
 			public void run() {
-				window=new Window(1300, 800, "Awesome");
-				
+				//window=new Window(1300, 800, "Awesome");
+				new GameLoop();
 				
 			}
 		});
@@ -20,7 +20,7 @@ public class Main {
 	}
 	
 	public static void run(){
-		//new GameLoop();
+		new GameLoop();
 	}
 
 }
