@@ -30,41 +30,45 @@ public class GameLoop {
 
 	}
 
-	private void doTurn(Player player, Player enemy) {
-		player.draw();
-
-		System.out.println(player + " hand :");
-		Displayer.display(player.getHand());
-		System.out.println();
-
-		if (player.isBoardEmpty())
-			player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
-
-		System.out.println(player + " board :");
-		System.out.println(player.getBattler());
-		if (!enemy.isBoardEmpty()) {
-			System.out.println(enemy + " board :");
-			System.out.println(enemy.getBattler());
-		}
-		System.out.println();
-
-		if (!enemy.isBoardEmpty()) {
-			player.getBattler().attack(enemy.getBattler());
-			Displayer.attackCard(player.getBattler(), enemy.getBattler());
-			if (player.getBattler().getHitPoints() <= 0) {
-				player.takeDamages(1);
-				Displayer.die(player.getBattler());
-				player.cleanBoard();
-			}
-			if (enemy.getBattler().getHitPoints() <= 0) {
-				enemy.takeDamages(1);
-				Displayer.die(enemy.getBattler());
-				enemy.cleanBoard();
-			}
-		}
-		System.out.println(player + "    " + player.getShield());
-		System.out.println(enemy + "    " + enemy.getShield());
+//	private void doTurn(Player player, Player enemy) {
+//		player.draw();
+//
+//		System.out.println(player + " hand :");
+//		Displayer.display(player.getHand());
+//		System.out.println();
+//
+//		if (player.isBoardEmpty())
+//			player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
+//
+//		System.out.println(player + " board :");
+//		System.out.println(player.getBattler());
+//		if (!enemy.isBoardEmpty()) {
+//			System.out.println(enemy + " board :");
+//			System.out.println(enemy.getBattler());
+//		}
+//		System.out.println();
+//
+//		if (!enemy.isBoardEmpty()) {
+//			player.getBattler().attack(enemy.getBattler());
+//			Displayer.attackCard(player.getBattler(), enemy.getBattler());
+//			if (player.getBattler().getHitPoints() <= 0) {
+//				player.takeDamages(1);
+//				Displayer.die(player.getBattler());
+//				player.cleanBoard();
+//			}
+//			if (enemy.getBattler().getHitPoints() <= 0) {
+//				enemy.takeDamages(1);
+//				Displayer.die(enemy.getBattler());
+//				enemy.cleanBoard();
+//			}
+//		}
+//		System.out.println(player + "    " + player.getShield());
+//		System.out.println(enemy + "    " + enemy.getShield());
+//	}
+	private void doTurn(Player player, Player enemy){
+		
 	}
+	
 
 	private void startDraw(Player player) {
 		for (int i = 0; i < START_HAND_SIZE; ++i)
