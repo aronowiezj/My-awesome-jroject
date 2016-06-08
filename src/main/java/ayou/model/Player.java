@@ -43,11 +43,10 @@ public class Player {
 		return board.isEmpty();
 	}
 
-	public void play(Card card) {
+	public void invoke(Card card) {
 		hand.removeCard(card);
 		board.addCard(card);
-		
-		card.invocation();
+		card.invocation(this);
 	}
 
 	// deprecated
