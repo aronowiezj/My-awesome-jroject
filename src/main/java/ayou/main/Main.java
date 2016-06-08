@@ -1,7 +1,6 @@
 package ayou.main;
 
 import ayou.model.GameLoop;
-import ayou.model.GameLoopLOL;
 import ayou.view.Window;
 
 public class Main {
@@ -22,7 +21,6 @@ public class Main {
 	
 	public static void run(){
 		//new GameLoop();
-		new GameLoopLOL();
 	}
 
 }
