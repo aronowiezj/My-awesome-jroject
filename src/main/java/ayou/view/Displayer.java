@@ -30,4 +30,11 @@ public class Displayer {
 		return card.getName() + " died";
 	}
 
+	public static String buildCards(List<Card> cards) {
+		int i = 1;
+		StringBuilder output = new StringBuilder();
+		for (Card card : cards)
+			output.append(i++ + ". " + card);
+		return output.toString();
+	}
 }

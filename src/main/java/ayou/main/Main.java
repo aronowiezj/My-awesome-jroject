@@ -15,9 +15,4 @@ public class Main {
 		});
 
 	}
-
-	public static void run() {
-		new Thread(new GameLoop()).run();
-	}
-
 }

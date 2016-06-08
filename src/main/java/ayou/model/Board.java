@@ -2,13 +2,19 @@ package ayou.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Board {
+import ayou.view.GameCanvas;
+
+public class Board extends Observable {
 
 	private List<Card> cardList;
+	boolean isPlayer;
 
-	public Board() {
+	public Board(boolean isPlayer) {
 		cardList = new ArrayList<>();
+		this.isPlayer = isPlayer;
+		addObserver(GameCanvas.getInstance());
 	}
 
 	public List<Card> getCards() {
@@ -25,10 +31,14 @@ public class Board {
 
 	public void addCard(Card card) {
 		cardList.add(card);
+		hasChanged();
+		notifyObservers();
 	}
 
 	public void removeCard(Card card) {
 		cardList.remove(card);
+		hasChanged();
+		notifyObservers();
 	}
 
 	public int size() {

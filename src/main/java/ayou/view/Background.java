@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("serial")
 public class Background extends JPanel {
 
-	private final String BACKGROUND_URL = "bg_hearthstone.png";
+	private final String BACKGROUND_URL = "bg_hearthstone.jpg";
 	private BufferedImage bg;
 	final static Logger logger = LoggerFactory.getLogger(Background.class);
 

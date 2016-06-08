@@ -5,7 +5,7 @@ package ayou.model;
  *
  */
 public class Card {
-	
+
 	public static final int IMG_SIZE_X = 30;
 	public static final int IMG_SIZE_Y = 30;
 
@@ -28,12 +28,12 @@ public class Card {
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
 
-	public Card(int idCard, String name, String idImg, int power,  int maxHitPoints, 
-			 boolean canAtk, boolean celerity, int healAlly, boolean healAllAllies, 
-			int buffAlly, boolean buffAllAllies, int debuffEnemy, boolean debuffAllEnemies) {
-		this.ID_CARD=idCard;
+	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
+			int healAlly, boolean healAllAllies, int buffAlly, boolean buffAllAllies, int debuffEnemy,
+			boolean debuffAllEnemies) {
+		this.ID_CARD = idCard;
 		this.name = name;
-		this.ID_IMG="test";
+		this.ID_IMG = "test";
 		this.POWER = power;
 		this.MAX_HIT_POINTS = maxHitPoints;
 		this.hitPoints = maxHitPoints;
@@ -50,14 +50,14 @@ public class Card {
 		debuffAllEnemies = false;
 		this.powerBuffs = 0;
 		this.lifeBuffs = 0;
-		this.canAttack=canAtk;
-		this.celerity=celerity;
-		this.healAlly=healAlly;
-		this.healAllAllies=healAllAllies;
-		this.buffAlly=buffAlly;
-		this.buffAllAllies=buffAllAllies;
-		this.debuffEnemy=debuffEnemy;
-		this.debuffAllEnemies=debuffAllEnemies;
+		this.canAttack = canAtk;
+		this.celerity = celerity;
+		this.healAlly = healAlly;
+		this.healAllAllies = healAllAllies;
+		this.buffAlly = buffAlly;
+		this.buffAllAllies = buffAllAllies;
+		this.debuffEnemy = debuffEnemy;
+		this.debuffAllEnemies = debuffAllEnemies;
 	}
 
 	public int getCardID() {
@@ -95,6 +95,7 @@ public class Card {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
+
 	public void getHealed(int heal) {
 		if (this.hitPoints + heal < this.MAX_HIT_POINTS) {
 			hitPoints += heal;
@@ -113,10 +114,10 @@ public class Card {
 
 	public void invocation(Player player) {
 		Player enemy;
-		if (player == GameLoop.player1) {
-			enemy = GameLoop.player2;
+		if (player == GameLoop.getInstance().getPlayer1()) {
+			enemy = GameLoop.getInstance().getPlayer2();
 		} else {
-			enemy = GameLoop.player1;
+			enemy = GameLoop.getInstance().getPlayer1();
 		}
 		if (healAlly > 0) {
 			if (healAllAllies) {
@@ -132,9 +133,8 @@ public class Card {
 				for (Card card : enemy.getBoard()) {
 					card.getPowerBuffed(-debuffEnemy);
 				}
-			}
-			else{
-				
+			} else {
+
 			}
 		}
 		if (buffAlly > 0) {
@@ -142,9 +142,8 @@ public class Card {
 				for (Card card : player.getBoard()) {
 					card.getPowerBuffed(buffAlly);
 				}
-			}
-			else{
-				
+			} else {
+
 			}
 		}
 
