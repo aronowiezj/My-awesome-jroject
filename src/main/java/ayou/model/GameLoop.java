@@ -126,20 +126,20 @@ public class GameLoop extends Thread {
 		// }
 		// }
 		for (Card c : player.getBoard()) {
-			//if (c.isCanAttack()) {
-				System.out.println("Qui attaquer? 0 pour le héros");
-				int cible = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
-				if (cible >= 0) {
-					if (cible < enemy.getBoard().size()) {
-						c.attack(enemy.getBoard().get(cible));
-					}
-
-				} else {
-					enemy.takeDamages(1);
+			// if (c.isCanAttack()) {
+			System.out.println("Qui attaquer? 0 pour le héros");
+			int cible = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
+			if (cible >= 0) {
+				if (cible < enemy.getBoard().size()) {
+					c.attack(enemy.getBoard().get(cible));
 				}
-			//} else {
-			//	c.setCanAttack(true);
-			//}
+
+			} else {
+				enemy.takeDamages(1);
+			}
+			// } else {
+			// c.setCanAttack(true);
+			// }
 
 		}
 		System.out.println(player + "    " + player.getShield());
