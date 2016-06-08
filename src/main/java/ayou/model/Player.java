@@ -9,6 +9,11 @@ public class Player {
 	private Board board;
 	private int shieldLevel;
 	private String name;
+	private int id;
+
+	public Player() {
+
+	}
 
 	public Player(String name, boolean isPlayer) {
 		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
@@ -29,6 +34,22 @@ public class Player {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setID(int id) {
+		this.id = id;
+	}
+
+	public int getID() {
+		return id;
 	}
 
 	public List<Card> getHand() {

@@ -15,7 +15,7 @@ public class Finger extends Observable implements MouseMotionListener, MouseList
 //	private boolean isActive;
 
 	public Finger() {
-		new GameLoop().start();
+		GameLoop.getInstance().start();
 	}
 
 	@Override
