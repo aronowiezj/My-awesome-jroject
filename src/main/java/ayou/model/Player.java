@@ -10,10 +10,10 @@ public class Player {
 	private int shieldLevel;
 	private String name;
 
-	public Player(String name) {
+	public Player(String name, boolean isPlayer) {
 		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
 		hand = new Hand();
-		board = new Board();
+		board = new Board(isPlayer);
 		this.name = name;
 		shieldLevel = 5;
 	}

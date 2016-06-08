@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import ayou.main.Main;
+import controller.Finger;
 
 @SuppressWarnings("serial")
 public class Game extends Screen {
@@ -26,14 +26,16 @@ public class Game extends Screen {
 
 	public Game(Viewer view) {
 		super(view);
-		
-		Main.run();
 
 		setLayout(null);
 
 		JPanel panelGame = new JPanel();
 		panelGame.setBounds(0, 0, Viewer.SCREEN_WIDTH, Viewer.SCREEN_HEIGHT);
 		panelGame.setLayout(null);
+
+		Finger finger = new Finger();
+		panelGame.addMouseListener(finger);
+		panelGame.addMouseMotionListener(finger);
 
 		panelGame.add(GameCanvas.getInstance());
 
