@@ -6,7 +6,8 @@ package ayou.model;
 public class Card {
 
 	private final int POWER;
-	private int buffs;
+	private int powerBuffs;
+	private int lifeBuffs;
 	private final int MAX_HIT_POINTS;
 	private int hitPoints;
 	private String name;
@@ -16,7 +17,8 @@ public class Card {
 		this.MAX_HIT_POINTS = hitPoints;
 		this.hitPoints = hitPoints;
 		this.name = name;
-		this.buffs = 0;
+		powerBuffs = 0;
+		lifeBuffs = 0;
 	}
 
 	public void attack(Card targetCard) {
@@ -25,11 +27,11 @@ public class Card {
 	}
 
 	public int getPower() {
-		return POWER + buffs;
+		return POWER + powerBuffs;
 	}
 
 	public int getMaxHitPoints() {
-		return MAX_HIT_POINTS;
+		return MAX_HIT_POINTS + lifeBuffs;
 	}
 	
 	public int getHitPoints() {

@@ -1,5 +1,7 @@
 package ayou.view;
 
+import java.util.List;
+
 import ayou.model.Card;
 
 public class Displayer {
@@ -8,6 +10,12 @@ public class Displayer {
 		System.out.println("p1 : " + card1.toString());
 		System.out.println("p2 : " + card2.toString());
 		return "Cards on the ground : " + card1.toString() + " " + card2.toString();
+	}
+
+	public static void display(List<Card> cards) {
+		int i = 1;
+		for (Card card : cards)
+			System.out.println(i++ + ". " + card);
 	}
 
 	public static String attackCard(Card cardAtt, Card cardDef) {
