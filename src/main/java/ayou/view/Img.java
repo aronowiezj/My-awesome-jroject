@@ -18,13 +18,13 @@ public class Img {
 
 	public Img(Card card) {
 		try {
-			img = ImageIO.read(new File("img/" + card.getImgID() + ".jpg"));
+			img = ImageIO.read(new File("img/" + card.getCardID() + ".jpg"));
 		} catch (IOException e) {
-			System.err.println(card.getImgID() + ".jpg NOT FOUND");
+			System.err.println(card.getCardID() + ".jpg NOT FOUND");
 		}
 
 		img = resizeImage(img, Card.IMG_SIZE_X, Card.IMG_SIZE_Y);
-		url = "img/" + card.getImgID() + ".png";
+		url = "img/" + card.getCardID() + ".png";
 	}
 
 	public BufferedImage getImg() {
