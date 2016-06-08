@@ -2,10 +2,6 @@ package ayou.model;
 
 import java.util.List;
 
-/**
- * @author aronowij
- *
- */
 public class Player {
 
 	private Deck deck;
