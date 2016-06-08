@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 import ayou.view.Displayer;
 
-public class GameLoopYOLO {
+public class GameLoop {
 
 	static public int DECK_SIZE = 40;
 	static public int START_HAND_SIZE = 5;
 
-	public GameLoopYOLO() {
+	public GameLoop() {
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
 
