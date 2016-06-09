@@ -9,15 +9,27 @@ import ayou.model.Board;
 import java.util.List;
 
 public interface BoardDao {
-	@SqlUpdate("create table boards (id integer primary key autoincrement, int card1, int card2, int card3, int card4, int card5, int card6, int card7, int card8, int card9, int card10)")
+	@SqlUpdate("create table boards (id integer primary key autoincrement, j1 varchar(64) , listIdCardJ1 varchar(150), j2 varchar(64) , listIdCardJ2 varchar(150)")
 	void createBoardTable();
-
-	@SqlUpdate("insert into boards (card1, card2, card3, card4, card5, card6, card7, card8, card9, card10) values (null, null, null, null, null, null, null, null, null, null)")
-	@GetGeneratedKeys
-	int insert(@BindBean() Board board);
 
 	@SqlUpdate("drop table if exists boards")
 	void dropBoardsTable();
+	
+	@SqlUpdate("insert into boards (j1, listIdCardJ1, j2, listIdCardJ2) values (null , null, null, null)")
+	@GetGeneratedKeys
+	int initialize();
+	
+	@SqlUpdate("update boards set j1 = :playerName where id = :idBoard")
+	void insertJ1(@Bind("idBoard") int idBoard, @Bind("playerName") String playerName);
+	
+	@SqlUpdate("update boards set j2 = :playerName where id = :idBoard")
+	void insertJ2(@Bind("idBoard") int idBoard, @Bind("playerName") String playerName);
+	
+	@SqlUpdate("update boards set listIdCardJ1 = :listName where id = :idBoard")
+	void insertListIdCardsJ1(@Bind("idBoard") int idBoard, @Bind("listName") String listName);
+	
+	@SqlUpdate("update boards set listIdCardJ2 = :listName where id = :idBoard")
+	void insertListIdCardsJ2(@Bind("idBoard") int idBoard, @Bind("listName") String listName);
 
 	@SqlQuery("select * from boards order by id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
@@ -26,9 +38,6 @@ public interface BoardDao {
 	@SqlQuery("select * from boards where id = :id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Board findById(@Bind("id") int id);
-	
-	@SqlUpdate("insert into boards (card1, card2, card3, card4, card5, card6, card7, card8, card9, card10) values (null, null, null, null, null, null, null, null, null, null)")
-	void insert(@Bind("idPlayer") int idPlayer);
 
 	void close();
 }
