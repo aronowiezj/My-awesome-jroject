@@ -58,7 +58,6 @@ public class Finger implements MouseMotionListener, MouseListener {
 
 	public static Card soloSelectCard() {
 		isActive = true;
-
 		while (selection == null) {
 			try {
 				Thread.sleep(0);
@@ -73,9 +72,12 @@ public class Finger implements MouseMotionListener, MouseListener {
 
 	public static Card selectCard(List<Card> cardList) {
 		Card card = null;
-		while (!cardList.contains(card)) {
+		for(Card c : cardList)
+			c.lockable();
+		while (!cardList.contains(card))
 			card = Finger.soloSelectCard();
-		}
+		for(Card c : cardList)
+			c.nonlockable();
 		return card;
 	}
 }
