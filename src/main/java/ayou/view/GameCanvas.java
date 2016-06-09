@@ -7,6 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import ayou.model.Board;
 import ayou.model.Card;
@@ -21,6 +23,8 @@ public class GameCanvas extends JPanel implements Observer {
 	private JPanel hand2;
 	private JPanel board1;
 	private JPanel board2;
+	
+	private JTextField turnPane;
 
 	private GameCanvas() {
 		setBounds(0, 0, Viewer.SCREEN_WIDTH, Viewer.SCREEN_HEIGHT);
@@ -41,8 +45,20 @@ public class GameCanvas extends JPanel implements Observer {
 		board2 = new JPanel();
 		initialize(board2, Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 2 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6,
 				VisualCard.HEIGHT);
-
+		
+		turnPane=new JTextField("Joueur 1");
+		turnPane.setBounds(65, Viewer.SCREEN_HEIGHT/2-10, 70, 20);
+		add(turnPane);
+				
 		repaint();
+	}
+	
+	public void changeTurn(){
+		if (turnPane.getText().equals("Joueur 1")) {
+			turnPane.setText("Joueur 2");
+		}
+		else
+			turnPane.setText("Joueur 1");
 	}
 	
 	public void createPlayers(){

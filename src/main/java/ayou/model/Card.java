@@ -25,6 +25,7 @@ public class Card extends Observable {
 	private boolean healAllAllies;
 	private int buffAlly;
 	private boolean buffAllAllies;
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -61,7 +62,7 @@ public class Card extends Observable {
 		this.debuffAllEnemies = debuffAllEnemies;
 		this.engagment = !celerity;
 		this.cout = cout;
-		
+
 	}
 
 	public Card(int idCard, String name, String idImg) {
@@ -97,6 +98,16 @@ public class Card extends Observable {
 	public void nonlockable() {
 		setChanged();
 		notifyObservers(1);
+	}
+
+	public void buffable() {
+		setChanged();
+		notifyObservers(5);
+	}
+
+	public void nonBuffable() {
+		setChanged();
+		notifyObservers(6);
 	}
 
 	public int getCardID() {
@@ -136,15 +147,14 @@ public class Card extends Observable {
 
 	public void setHitPoints(int damages) {
 		hitPoints -= damages;
-		if(hitPoints<=0){
-			if(GameLoop.getInstance().getPlayer1().getCardsOnBoard().contains(this)){
+		if (hitPoints <= 0) {
+			if (GameLoop.getInstance().getPlayer1().getCardsOnBoard().contains(this)) {
 				GameLoop.getInstance().getPlayer1().getBoard().removeCard(this);
-			}
-			else{
+			} else {
 				GameLoop.getInstance().getPlayer2().getBoard().removeCard(this);
 			}
 		}
-		
+
 		setChanged();
 		notifyObservers(2);
 	}
@@ -157,6 +167,7 @@ public class Card extends Observable {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
+
 	public void getHealed(int heal) {
 		if (this.hitPoints + heal < this.maxHitPoints + this.lifeBuffs) {
 			hitPoints += heal;
@@ -190,7 +201,13 @@ public class Card extends Observable {
 					card.getHealed(healAlly);
 				}
 			} else if (!player.isBoardEmpty()) {
+				for (Card card : player.getCardsOnBoard()) {
+					card.buffable();
+				}
 				Finger.selectCard(player.getCardsOnBoard()).getHealed(healAlly);
+				for (Card card : player.getCardsOnBoard()) {
+					card.nonBuffable();
+				}
 			}
 		}
 		if (debuffEnemy > 0) {
@@ -208,7 +225,13 @@ public class Card extends Observable {
 					card.getpowerBuffed(buffAlly);
 				}
 			} else if (!player.isBoardEmpty()) {
+				for (Card card : player.getCardsOnBoard()) {
+					card.buffable();
+				}
 				Finger.selectCard(player.getCardsOnBoard()).getpowerBuffed(buffAlly);
+				for (Card card : player.getCardsOnBoard()) {
+					card.nonBuffable();
+				}
 			}
 		}
 	}

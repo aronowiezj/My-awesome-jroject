@@ -1,6 +1,7 @@
 package ayou.model;
 
 import ayou.controller.Finger;
+import ayou.view.GameCanvas;
 
 public class GameLoop extends Thread {
 
@@ -12,12 +13,15 @@ public class GameLoop extends Thread {
 	private static GameLoop instance;
 
 	private GameLoop() {
+		player1 = new Player("Player1");
+		player2 = new Player("Player2");
 	}
 
 	public static GameLoop getInstance() {
 		if (instance == null) {
 			instance = new GameLoop();
 		}
+
 		return instance;
 	}
 
@@ -30,15 +34,15 @@ public class GameLoop extends Thread {
 	}
 
 	public void run() {
-		player1 = new Player("Player1");
-		player2 = new Player("Player2");
 
 		startDraw(player1);
 		startDraw(player2);
 
 		while (!player1.isDefeated() && !player2.isDefeated()) {
 			doTurn(player1, player2);
+			GameCanvas.getInstance().changeTurn();
 			doTurn(player2, player1);
+			GameCanvas.getInstance().changeTurn();
 		}
 
 		if (player1.isDefeated())
@@ -66,17 +70,14 @@ public class GameLoop extends Thread {
 					while (!enemy.getCardsOnBoard().contains(cible) && !cible.getName().equals("Hero1")
 							&& !cible.getName().equals("Hero2")) {
 						cible = Finger.soloSelectCard();
-						System.out.println("coucou");
-						if ((cible.getName().equals("Hero1") || cible.getName().equals("Hero2"))){
+						if ((cible.getName().equals("Hero1") || cible.getName().equals("Hero2"))) {
 							enemy.takeDamages(1);
-							System.out.println("haricot");
 						}
 					}
 
 					for (Card c : enemy.getCardsOnBoard())
 						c.nonlockable();
 					card.attack(cible);
-					System.out.println("Tomates");
 					card.setEngagment(true);
 				}
 			} else if (player.getCardsFromHand().contains(card) && !player.getHand().havePlayed()) {

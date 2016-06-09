@@ -24,6 +24,7 @@ public class VisualCard extends JPanel implements Observer {
 
 	private boolean lockable;
 	private boolean engaged;
+	private boolean buffable;
 	// private boolean handed;
 	// private boolean playable;
 	// private boolean sacrifiable;
@@ -38,7 +39,8 @@ public class VisualCard extends JPanel implements Observer {
 		life = new TextField();
 		price = new TextField(card.getCout() + "");
 		
-		life.setText(card.getHitPoints() + "");
+//		life.setText(card.getHitPoints() + "");
+		updateLife();
 		
 		name.setBounds(0, HEIGHT / 8, WIDTH, HEIGHT / 8 * 3);
 		power.setBounds(0, HEIGHT / 2, WIDTH / 2, HEIGHT / 2 - 30);
@@ -60,8 +62,11 @@ public class VisualCard extends JPanel implements Observer {
 	}
 
 	private void colorize() {
-		if (lockable)
+		if (lockable&& !buffable)
 			this.setBackground(Color.RED);
+		else if (buffable && lockable) {
+			this.setBackground(Color.CYAN);
+		}
 		/*
 		 * else if (handed) { if (playable) this.setBackground(Color.GREEN);
 		 * else this.setBackground(Color.GREEN); }
@@ -106,7 +111,22 @@ public class VisualCard extends JPanel implements Observer {
 		case 4:
 			updateEngagement();
 			break;
+		case 5:
+			buffable();
+			break;
+		case 6:
+			nonBuffable();
+			break;
 		}
+	}
+
+	private void buffable() {
+		buffable= true;
+		colorize();
+	}
+	public void nonBuffable() {
+		buffable = false;
+		colorize();
 	}
 
 	private void updateEngagement() {

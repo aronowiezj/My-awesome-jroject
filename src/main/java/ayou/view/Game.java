@@ -29,6 +29,7 @@ public class Game extends Screen {
 
 		setLayout(null);
 
+		GameLoop.getInstance().start();
 		JPanel panelGame = new JPanel();
 		panelGame.setBounds(0, 0, Viewer.SCREEN_WIDTH, Viewer.SCREEN_HEIGHT);
 		panelGame.setLayout(null);
@@ -37,7 +38,6 @@ public class Game extends Screen {
 
 		panelGame.add(new Background());
 
-		GameLoop.getInstance().start();
 		
 		GameCanvas.getInstance().createPlayers();
 
