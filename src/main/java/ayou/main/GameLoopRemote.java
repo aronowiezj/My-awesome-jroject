@@ -1,12 +1,10 @@
 package ayou.main;
 
-import java.util.List;
-
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
+import ayou.model.CardEntity;
 import ayou.model.Player;
 
 public class GameLoopRemote {
