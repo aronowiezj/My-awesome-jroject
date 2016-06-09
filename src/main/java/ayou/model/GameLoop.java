@@ -1,10 +1,10 @@
 package ayou.model;
 
+import java.util.List;
 import java.util.Scanner;
 
+import ayou.controller.Finger;
 import ayou.view.Displayer;
-import ayou.view.GameCanvas;
-import ayou.view.Viewer;
 
 public class GameLoop extends Thread {
 
@@ -98,7 +98,8 @@ public class GameLoop extends Thread {
 		System.out.println();
 
 		System.out.println("Quelle carte jouer?");
-		player.invoke(player.getHand().get(Integer.parseInt(new Scanner(System.in).nextLine()) - 1));
+		
+		player.invoke(selectCard(player.getHand()));
 
 		System.out.println(player + " board :");
 		System.out.println(player.getBoard());
@@ -145,6 +146,13 @@ public class GameLoop extends Thread {
 		System.out.println(player + "    " + player.getShield());
 		System.out.println(enemy + "    " + enemy.getShield());
 
+	}
+
+	private Card selectCard(List<Card> cardList) {
+		Card card = null;
+		while(!cardList.contains(card))
+			card = Finger.selectCard();
+		return card;
 	}
 
 	private void startDraw(Player player) {

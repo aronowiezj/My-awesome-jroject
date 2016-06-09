@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import ayou.view.GameCanvas;
+
 /**
  * @author aronowij
  *
@@ -17,17 +19,18 @@ public class Hand extends Observable {
 
 	public Hand() {
 		cardList = new ArrayList<>();
+		addObserver(GameCanvas.getInstance());
 	}
 
 	public void addCard(Card card) {
 		cardList.add(card);
-		hasChanged();
+		setChanged();
 		notifyObservers();
 	}
 
 	public void removeCard(Card card) {
 		cardList.remove(card);
-		hasChanged();
+		setChanged();
 		notifyObservers();
 	}
 

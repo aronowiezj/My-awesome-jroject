@@ -5,17 +5,24 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Observable;
 
+import ayou.model.Card;
 import ayou.model.GameLoop;
+import ayou.view.VisualCard;
 
-public class Finger extends Observable implements MouseMotionListener, MouseListener {
+public class Finger/*extends Thread*/ implements MouseMotionListener, MouseListener {
 
-	public static final int POWER_SIZE_MAX = 100;
-	public static final double TIME_FOR_MAX_POWER = 1.0;
+	private static Finger instance;
+	private static boolean isActive;
+	static private Card selection;
 
-//	private boolean isActive;
+	private Finger() {
+	}
 
-	public Finger() {
-		GameLoop.getInstance().start();
+	public static Finger getInstance() {
+		if (instance == null) {
+			instance = new Finger();
+		}
+		return instance;
 	}
 
 	@Override
@@ -28,6 +35,10 @@ public class Finger extends Observable implements MouseMotionListener, MouseList
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (isActive) {
+			selection = ((VisualCard) e.getSource()).getCard();
+			isActive = false;
+		}
 	}
 
 	@Override
@@ -44,5 +55,19 @@ public class Finger extends Observable implements MouseMotionListener, MouseList
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+	}
+
+	public static Card selectCard() {
+		isActive = true;
+		
+		while(selection == null){
+			try {
+				Thread.sleep(0);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return selection;
 	}
 }

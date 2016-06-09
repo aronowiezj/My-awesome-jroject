@@ -9,6 +9,11 @@ public class Player {
 	private Board board;
 	private int shieldLevel;
 	private String name;
+	private int id;
+
+	public Player() {
+
+	}
 
 	public Player(String name, boolean isPlayer) {
 		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
@@ -31,8 +36,28 @@ public class Player {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setID(int id) {
+		this.id = id;
+	}
+
+	public int getID() {
+		return id;
+	}
+
 	public List<Card> getHand() {
 		return hand.getCards();
+	}
+	
+	public int getHandSize() {
+		return hand.getCards().size();
 	}
 
 	public boolean isBoardEmpty() {
@@ -56,6 +81,10 @@ public class Player {
 
 	public List<Card> getBoard() {
 		return board.getCards();
+	}
+	
+	public int getBoardSize() {
+		return board.getCards().size();
 	}
 
 	public void takeDamages(int damages) {

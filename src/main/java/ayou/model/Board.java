@@ -31,13 +31,13 @@ public class Board extends Observable {
 
 	public void addCard(Card card) {
 		cardList.add(card);
-		hasChanged();
+		setChanged();
 		notifyObservers();
 	}
 
 	public void removeCard(Card card) {
 		cardList.remove(card);
-		hasChanged();
+		setChanged();
 		notifyObservers();
 	}
 
