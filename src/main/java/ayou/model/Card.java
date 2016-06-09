@@ -57,6 +57,7 @@ public class Card extends Observable {
 		this.debuffAllEnemies = debuffAllEnemies;
 		this.engagment = !celerity;
 		this.cout = cout;
+		
 	}
 
 	public Card(int idCard, String name, String idImg) {
