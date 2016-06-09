@@ -9,13 +9,13 @@ public class Card {
 	public static final int IMG_SIZE_X = 30;
 	public static final int IMG_SIZE_Y = 30;
 
-	private final int ID_CARD;
+	private int idCard;
 	private String name;
-	private final String ID_IMG;
+	private String idImg;
 
-	private final int POWER;
+	private int power;
 	private int powerBuffs;
-	private final int MAX_HIT_POINTS;
+	private int maxHitPoints;
 	private int hitPoints;
 	private int lifeBuffs;
 
@@ -31,11 +31,11 @@ public class Card {
 	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
 			int healAlly, boolean healAllAllies, int buffAlly, boolean buffAllAllies, int debuffEnemy,
 			boolean debuffAllEnemies) {
-		this.ID_CARD = idCard;
+		this.idCard = idCard;
 		this.name = name;
-		this.ID_IMG = "test";
-		this.POWER = power;
-		this.MAX_HIT_POINTS = maxHitPoints;
+		this.idImg = "test";
+		this.power = power;
+		this.maxHitPoints = maxHitPoints;
 		this.hitPoints = maxHitPoints;
 		this.name = name;
 		powerBuffs = 0;
@@ -60,8 +60,12 @@ public class Card {
 		this.debuffAllEnemies = debuffAllEnemies;
 	}
 
+	public Card(){
+		
+	}
+	
 	public int getCardID() {
-		return ID_CARD;
+		return idCard;
 	}
 
 	public void attack(Card targetCard) {
@@ -85,11 +89,11 @@ public class Card {
 	}
 
 	public int getPower() {
-		return POWER + powerBuffs;
+		return power + powerBuffs;
 	}
 
 	public int getMaxHitPoints() {
-		return MAX_HIT_POINTS + lifeBuffs;
+		return maxHitPoints + lifeBuffs;
 	}
 
 	public int getHitPoints() {
@@ -110,18 +114,18 @@ public class Card {
 	}
 
 	public void getHealed(int heal) {
-		if (this.hitPoints + heal < this.MAX_HIT_POINTS) {
+		if (this.hitPoints + heal < this.maxHitPoints) {
 			hitPoints += heal;
 		} else {
-			hitPoints = MAX_HIT_POINTS;
+			hitPoints = maxHitPoints;
 		}
 	}
 
 	// @copyright
-	public void getPowerBuffed(int buff) {
+	public void getpowerBuffed(int buff) {
 		powerBuffs += buff;
-		if ((powerBuffs + POWER) < 0) {
-			powerBuffs = -POWER;
+		if ((powerBuffs + power) < 0) {
+			powerBuffs = -power;
 		}
 	}
 
@@ -144,7 +148,7 @@ public class Card {
 		if (debuffEnemy > 0) {
 			if (debuffAllEnemies) {
 				for (Card card : enemy.getBoard()) {
-					card.getPowerBuffed(-debuffEnemy);
+					card.getpowerBuffed(-debuffEnemy);
 				}
 			} else {
 
@@ -153,7 +157,7 @@ public class Card {
 		if (buffAlly > 0) {
 			if (buffAllAllies) {
 				for (Card card : player.getBoard()) {
-					card.getPowerBuffed(buffAlly);
+					card.getpowerBuffed(buffAlly);
 				}
 			} else {
 

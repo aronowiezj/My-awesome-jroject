@@ -15,8 +15,8 @@ public class CardRessource {
 		try {
 			dao.deleteCardTable();
 			dao.createCardTable();
-			dao.deleteEffectsTable();
-			dao.createEffectsTable();
+			//dao.deleteEffectsTable();
+			//dao.createEffectsTable();
 		} catch (Exception e) {
 			System.out.println("Board déjà existant !");
 		}
@@ -29,7 +29,7 @@ public class CardRessource {
     
     @POST
     public void fillEffectsTable(){
-    	dao.fillEffectsTable();
+    	//dao.fillEffectsTable();
     }
     
     @PUT

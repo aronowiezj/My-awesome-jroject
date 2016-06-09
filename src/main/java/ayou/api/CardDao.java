@@ -15,15 +15,15 @@ public interface CardDao {
 	void fillCardTable();
 
 	@SqlUpdate("DROP TABLE IF EXISTS effects;")
-	void deleteEffectTable();
+	void deleteEffectsTable();
 	
 	@SqlUpdate("CREATE TABLE IF NOT EXISTS effects(id Integer Primary Key, nom Char(20));")
-	void createEffectTable();
+	void createEffectsTable();
 
 	@SqlUpdate("INSERT INTO effects VALUES (1, 'initiative'),(2, 'soin'),(3, 'ralliement'),(4, 'entrave'),(5, 'NonMépliiz');")
-	void fillEffectTable();
+	void fillEffectsTable();
 	
-	@SqlUpdate("Update cards set ATK = ATK + ")
+	@SqlUpdate("Update cards set ATK = ATK + :buffATK - :debuffATK, DEF = DEF + :buffDEF - :debuffDEF where id = :id")
 	void updateCard(@Bind("id") int id, @Bind("buffATK") int buffATK, @Bind("debuffATK") int debuffATK, @Bind("buffDEF") int buffDEF, @Bind("debuffDEF") int debuffDEF);
 
 	void close();
