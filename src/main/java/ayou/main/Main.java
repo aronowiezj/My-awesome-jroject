@@ -1,6 +1,5 @@
 package ayou.main;
 
-import ayou.controller.Finger;
 import ayou.model.GameLoop;
 import ayou.view.Viewer;
 

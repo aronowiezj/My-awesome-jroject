@@ -10,7 +10,7 @@ public class Player {
 	private int shieldLevel = 5;
 	private String name = "";
 	private int id = 0;
-	private GraveYard graveYard=new GraveYard();
+	private GraveYard graveYard = new GraveYard();
 
 	public Player() {
 	}
@@ -22,8 +22,8 @@ public class Player {
 	public void draw() {
 		hand.addCard(deck.draw());
 	}
-	
-	public void toGraveYard(Card card){
+
+	public void toGraveYard(Card card) {
 		this.graveYard.addCard(card);
 		this.board.removeCard(card);
 	}
@@ -56,7 +56,7 @@ public class Player {
 	public List<Card> getHand() {
 		return hand.getCards();
 	}
-	
+
 	public int getHandSize() {
 		return hand.getCards().size();
 	}
@@ -78,8 +78,7 @@ public class Player {
 	public List<Card> getBoard() {
 		return board.getCards();
 	}
-	
-	
+
 	public int getBoardSize() {
 		return board.getCards().size();
 	}
@@ -91,6 +90,14 @@ public class Player {
 
 	public int getShield() {
 		return shieldLevel;
+	}
+
+	public void disengage() {
+		if (!this.isBoardEmpty()) {
+			for (Card c : this.getBoard()) {
+				c.setEngagment(false);
+			}
+		}
 	}
 
 }

@@ -53,26 +53,32 @@ public class GameLoop extends Thread {
 	}
 
 	private void doTurn(Player player, Player enemy) {
+		System.out.println("Tour suivant");
 		player.draw();
+		player.disengage();
 		boolean putCard=false;
 		player.invoke(selectCard(player.getHand()));
 		
-		
-		for (Card c : player.getBoard()) {
-			if (c.isCelerity()) {
-				Card cible=selectCard(enemy.getBoard());
-				c.attack(cible);
-				if(c.isDead()){
-					player.toGraveYard(c);
+		if (!player.isBoardEmpty()) {
+			for (Card c : player.getBoard()) {
+				if (!c.isEngaged()) {
+					if(!enemy.isBoardEmpty()){
+						Card cible=selectCard(enemy.getBoard());
+						c.attack(cible);
+						if(c.isDead()){
+							player.toGraveYard(c);
+						}
+						if(cible.isDead()){
+							enemy.toGraveYard(cible);
+						}
+						c.setEngagment(true);
+					}
+					
 				}
-				if(cible.isDead()){
-					enemy.toGraveYard(cible);
-				}
-			}else {
-				c.setCelerity(true);
-			}
 
+			}
 		}
+		
 		System.out.println(player + "    " + player.getShield());
 		System.out.println(enemy + "    " + enemy.getShield());
 

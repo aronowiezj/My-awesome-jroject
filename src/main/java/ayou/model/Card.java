@@ -27,6 +27,7 @@ public class Card {
 	private boolean buffAllAllies;
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
+	private boolean engagment=true;
 
 	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
 			int healAlly, boolean healAllAllies, int buffAlly, boolean buffAllAllies, int debuffEnemy,
@@ -58,6 +59,7 @@ public class Card {
 		this.buffAllAllies = buffAllAllies;
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
+		this.engagment=celerity;
 	}
 
 	public Card(){
@@ -165,8 +167,17 @@ public class Card {
 		}
 
 	}
+	
 
 	public boolean isDead() {
 		return hitPoints<=0;
+	}
+
+	public boolean isEngaged() {
+		return engagment;
+	}
+	
+	public void setEngagment(boolean engagment){
+		this.engagment=engagment;
 	}
 }
