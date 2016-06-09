@@ -8,11 +8,22 @@ import ayou.view.GameCanvas;
 
 public class Board extends Observable {
 
-	private List<Card> cardList;
+	
 
+	private List<Card> cardList;
+	private Player player;
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public Board() {
 		cardList = new ArrayList<>();
 		addObserver(GameCanvas.getInstance());
+	}
+	
+	public Board(Player player){
+		this.player=player;
 	}
 
 	public List<Card> getCards() {

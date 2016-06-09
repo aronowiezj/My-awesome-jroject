@@ -56,7 +56,8 @@ public class GameLoop extends Thread {
 		player.draw();
 		boolean putCard=false;
 		player.invoke(selectCard(player.getHand()));
-
+		
+		
 		for (Card c : player.getBoard()) {
 			if (c.isCelerity()) {
 				Card cible=selectCard(enemy.getBoard());

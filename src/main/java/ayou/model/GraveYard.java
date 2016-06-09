@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraveYard {
-	private List<Card> cardList=new ArrayList<>();
-	
-	
+	private List<Card> cardList = new ArrayList<>();
+
+	private Player player;
+
+	public Player getPlayer() {
+		return player;
+	}
 
 	public List<Card> getCards() {
 		return cardList;
@@ -31,6 +35,5 @@ public class GraveYard {
 	public int size() {
 		return cardList.size();
 	}
-	
-	
+
 }
