@@ -8,13 +8,18 @@ package ayou.model;
  *
  */
 public class Hand extends CardCollection {
-
-	// public Hand() {
-	// addObserver(GameCanvas.getInstance());
-	// }
+	private boolean played;
 
 	public Hand(Player player) {
 		super(player);
+	}
+	
+	public boolean havePlayed(){
+		return played;
+	}
+	
+	public void setPlayed(boolean played){
+		this.played=played;
 	}
 
 }

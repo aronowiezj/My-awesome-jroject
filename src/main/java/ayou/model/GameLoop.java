@@ -52,31 +52,22 @@ public class GameLoop extends Thread {
 		System.out.println("Tour de : " + player.toString());
 		player.draw();
 		player.disengage();
-//		boolean putCard = false;
-		player.invoke(Finger.selectCard(player.getHand()));
-
-		if (!player.isBoardEmpty()) {
-			System.out.println("BOARD: " + player.getBoardSize());
-			for (Card c : player.getCardsOnBoard()) {
-				if (!c.isEngaged()) {
-					if (!enemy.isBoardEmpty()) {
-						Card cible = Finger.selectCard(enemy.getCardsOnBoard());
-						c.attack(cible);
-						if (c.isDead()) {
-							player.toGraveYard(c);
-						}
-						if (cible.isDead()) {
-							enemy.toGraveYard(cible);
-						}
-						c.setEngagment(true);
-					} else {
-						enemy.takeDamages(1);
-					}
-
-				}
-
+		boolean endOfTime=false;
+		
+		while(!endOfTime){
+			Card card=Finger.soloSelectCard();
+			if(card.getName().equals("EndTurn")){
+				endOfTime=true;
 			}
-		}
+			else if (player.getCardsOnBoard().contains(card)) {
+				if(card.canAttaque()&&!card.isEngaged()){
+					card.attack(Finger.selectCard(enemy.getCardsOnBoard()));
+				}
+			}
+			else if(player.getCardsFromHand().contains(card)&&!player.getHand().havePlayed()){
+				player.invoke(card);
+			}
+		} 
 
 		System.out.println(player + "    " + player.getShield());
 		System.out.println(enemy + "    " + enemy.getShield());

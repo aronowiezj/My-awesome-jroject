@@ -53,7 +53,11 @@ public class Player {
 		return id;
 	}
 
-	public List<Card> getHand() {
+	public Hand getHand() {
+		return hand;
+	}
+	
+	public List<Card> getCardsFromHand() {
 		return hand.getCards();
 	}
 
@@ -67,6 +71,7 @@ public class Player {
 
 	public void invoke(Card card) {
 		hand.removeCard(card);
+		hand.setPlayed(true);
 		card.invocation(this);
 		board.addCard(card);
 

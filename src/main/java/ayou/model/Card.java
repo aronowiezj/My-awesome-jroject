@@ -23,7 +23,7 @@ public class Card {
 
 	private boolean canAttack;// can attack or never attack
 	private boolean celerity;
-	private int healAlly = 100;
+	private int healAlly;
 	private boolean healAllAllies;
 	private int buffAlly;
 	private boolean buffAllAllies;
@@ -42,16 +42,6 @@ public class Card {
 		this.maxHitPoints = maxHitPoints;
 		this.hitPoints = maxHitPoints;
 		this.name = name;
-		this.powerBuffs = 0;
-		this.lifeBuffs = 0;
-		this.canAttack = true;
-		this.celerity = false;
-		this.healAlly = 5;
-		this.healAllAllies = true;
-		this.buffAlly = 0;
-		this.buffAllAllies = false;
-		this.debuffEnemy = 0;
-		this.debuffAllEnemies = false;
 		this.powerBuffs = 0;
 		this.lifeBuffs = 0;
 		this.canAttack = canAtk;
@@ -73,16 +63,6 @@ public class Card {
 		this.maxHitPoints = 0;
 		this.hitPoints = 0;
 		this.name = name;
-		powerBuffs = 0;
-		lifeBuffs = 0;
-		canAttack = true;
-		celerity = false;
-		healAlly = 0;
-		healAllAllies = false;
-		buffAlly = 0;
-		buffAllAllies = false;
-		debuffEnemy = 0;
-		debuffAllEnemies = false;
 		this.powerBuffs = 0;
 		this.lifeBuffs = 0;
 		this.canAttack = false;
@@ -147,14 +127,13 @@ public class Card {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
-
 	public void getHealed(int heal) {
-		// if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
-		// hitPoints += heal;
-		// } else {
-		// hitPoints = maxHitPoints;
-		// }
-		hitPoints += heal;
+		 if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
+		 hitPoints += heal;
+		 } else {
+		 hitPoints = maxHitPoints+this.lifeBuffs;
+		 }
+
 	}
 
 	// @copyright
@@ -173,9 +152,11 @@ public class Card {
 		} else {
 			enemy = GameLoop.getInstance().getPlayer1();
 		}
+		System.out.println("heal?????"+healAlly);
 		if (healAlly > 0) {
-			System.out.println("heal");
+			System.out.println("heal:"+healAlly);
 			if (healAllAllies) {
+				System.out.println("HealAllAllies");
 				for (Card card : player.getCardsOnBoard()) {
 					card.getHealed(healAlly);
 				}
