@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.ws.rs.client.ClientBuilder;
+
 /**
  * @author aronowij
  *
@@ -11,16 +13,12 @@ import java.util.Random;
 public class RandomCardFactory {
 
 	public static Card genereRandomCard(){
-		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-		StringBuilder stringBuilder = new StringBuilder();
-		Random random = new Random();
 		
-		for (int i = 0; i < 20; i++) {
-		    char c = chars[random.nextInt(chars.length)];
-		    stringBuilder.append(c);
-		}
-		String name = stringBuilder.toString();
-		return new Card(0, name,null,(int)(Math.random()*10+1),(int)(Math.random()*10+1), true,false,0,false,0,false,0,false,0);
+		CardEntity card = ClientBuilder.newClient().target("http://localhost:8080/v1/card/random").request().get(CardEntity.class);
+		//new Card(idCard, name, idImg, power, maxHitPoints, canAtk, celerity, healAlly, healAllAllies, buffAlly, buffAllAllies, debuffEnemy, debuffAllEnemies, cout)
+		
+		return new Card(card.getIdCard(), card.getName(),card.getIdImg(),card.getPower(),card.getMaxHitPoints(),
+				card.isCanAtk(),card.isCelerity(),card.getHealAlly(),card.isHealAllAlly(),card.getBuffAlly(),card.isBuffAllAlly(),card.getDebuffEnemy(),card.isDebuffAllEnemies(),card.getCout());
 	}
 
 	/**
