@@ -1,7 +1,6 @@
 package ayou.model;
 
 import java.util.Observable;
-import java.util.Observer;
 
 import ayou.controller.Finger;
 
@@ -85,8 +84,14 @@ public class Card extends Observable {
 
 	}
 
-	public void addObserver(Observer observer) {
-		addObserver(observer);
+	public void lockable() {
+		setChanged();
+		notifyObservers(0);
+	}
+
+	public void nonlockable() {
+		setChanged();
+		notifyObservers(1);
 	}
 
 	public int getCardID() {
@@ -126,6 +131,8 @@ public class Card extends Observable {
 
 	public void setHitPoints(int damages) {
 		hitPoints -= damages;
+		setChanged();
+		notifyObservers(2);
 	}
 
 	public String getName() {
@@ -136,22 +143,23 @@ public class Card extends Observable {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
-
 	public void getHealed(int heal) {
 		if (this.hitPoints + heal < this.maxHitPoints + this.lifeBuffs) {
 			hitPoints += heal;
 		} else {
 			hitPoints = maxHitPoints + this.lifeBuffs;
 		}
-
+		setChanged();
+		notifyObservers(2);
 	}
 
-	// @copyright
 	public void getpowerBuffed(int buff) {
 		powerBuffs += buff;
 		if ((powerBuffs + power) < 0) {
 			powerBuffs = -power;
 		}
+		setChanged();
+		notifyObservers(3);
 	}
 
 	public void invocation(Player player) {
@@ -192,7 +200,6 @@ public class Card extends Observable {
 				Finger.selectCard(player.getCardsOnBoard()).getpowerBuffed(buffAlly);
 			}
 		}
-
 	}
 
 	public int getLifeBuffs() {
@@ -249,6 +256,8 @@ public class Card extends Observable {
 
 	public void setEngagment(boolean engagment) {
 		this.engagment = engagment;
+		setChanged();
+		notifyObservers(4);
 	}
 
 }
