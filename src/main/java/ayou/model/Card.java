@@ -1,7 +1,5 @@
 package ayou.model;
 
-import java.util.List;
-
 import ayou.controller.Finger;
 
 /**
@@ -23,16 +21,16 @@ public class Card {
 	private int lifeBuffs;
 	private int hitPoints;
 
-	private boolean canAttack;//can attack or never attack
+	private boolean canAttack;// can attack or never attack
 	private boolean celerity;
-	private int healAlly=100;
+	private int healAlly = 100;
 	private boolean healAllAllies;
 	private int buffAlly;
 	private boolean buffAllAllies;
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
-	
-	private boolean engagment=true;
+
+	private boolean engagment = true;
 
 	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
 			int healAlly, boolean healAllAllies, int buffAlly, boolean buffAllAllies, int debuffEnemy,
@@ -64,13 +62,44 @@ public class Card {
 		this.buffAllAllies = buffAllAllies;
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
-		this.engagment=!celerity;
+		this.engagment = !celerity;
 	}
 
-	public Card(){
-		
+	public Card(int idCard, String name, String idImg) {
+		this.idCard = idCard;
+		this.name = name;
+		this.idImg = "test";
+		this.power = 0;
+		this.maxHitPoints = 0;
+		this.hitPoints = 0;
+		this.name = name;
+		powerBuffs = 0;
+		lifeBuffs = 0;
+		canAttack = true;
+		celerity = false;
+		healAlly = 0;
+		healAllAllies = false;
+		buffAlly = 0;
+		buffAllAllies = false;
+		debuffEnemy = 0;
+		debuffAllEnemies = false;
+		this.powerBuffs = 0;
+		this.lifeBuffs = 0;
+		this.canAttack = false;
+		this.celerity = false;
+		this.healAlly = 0;
+		this.healAllAllies = false;
+		this.buffAlly = 0;
+		this.buffAllAllies = false;
+		this.debuffEnemy = 0;
+		this.debuffAllEnemies = false;
+		this.engagment = true;
 	}
-	
+
+	public Card() {
+
+	}
+
 	public int getCardID() {
 		return idCard;
 	}
@@ -81,11 +110,10 @@ public class Card {
 			setHitPoints(targetCard.getPower());
 		}
 	}
-	
-	public boolean canAttaque(){
+
+	public boolean canAttaque() {
 		return canAttack;
 	}
-	
 
 	public boolean isCelerity() {
 		return celerity;
@@ -121,12 +149,12 @@ public class Card {
 	}
 
 	public void getHealed(int heal) {
-//		if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
-//			hitPoints += heal;
-//		} else {
-//			hitPoints = maxHitPoints;
-//		}
-		hitPoints+=heal;
+		// if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
+		// hitPoints += heal;
+		// } else {
+		// hitPoints = maxHitPoints;
+		// }
+		hitPoints += heal;
 	}
 
 	// @copyright
@@ -175,7 +203,6 @@ public class Card {
 		}
 
 	}
-	
 
 	public int getLifeBuffs() {
 		return lifeBuffs;
@@ -222,16 +249,15 @@ public class Card {
 	}
 
 	public boolean isDead() {
-		return hitPoints<=0;
+		return hitPoints <= 0;
 	}
 
 	public boolean isEngaged() {
 		return engagment;
 	}
-	
-	public void setEngagment(boolean engagment){
-		this.engagment=engagment;
+
+	public void setEngagment(boolean engagment) {
+		this.engagment = engagment;
 	}
-	
-	
+
 }

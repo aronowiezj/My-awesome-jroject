@@ -4,10 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
-/**
- * @author Jeremie
- *
- */
 @SuppressWarnings("serial")
 public abstract class Screen extends JPanel {
 
@@ -24,9 +20,6 @@ public abstract class Screen extends JPanel {
 		abstract public void mouseClicked(MouseEvent e);
 	}
 
-	/**
-	 * @param view Fentre actuelle
-	 */
 	public Screen(Viewer view) {
 		this.view = view;
 	}

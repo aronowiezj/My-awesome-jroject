@@ -1,10 +1,6 @@
 package ayou.model;
 
-import java.util.List;
-import java.util.Scanner;
-
 import ayou.controller.Finger;
-import ayou.view.Displayer;
 
 public class GameLoop extends Thread {
 
@@ -53,42 +49,39 @@ public class GameLoop extends Thread {
 	}
 
 	private void doTurn(Player player, Player enemy) {
-		System.out.println("Tour de : "+player.toString());
+		System.out.println("Tour de : " + player.toString());
 		player.draw();
 		player.disengage();
-		boolean putCard=false;
+//		boolean putCard = false;
 		player.invoke(Finger.selectCard(player.getHand()));
-		
+
 		if (!player.isBoardEmpty()) {
-			System.out.println("BOARD: "+player.getBoardSize());
+			System.out.println("BOARD: " + player.getBoardSize());
 			for (Card c : player.getCardsOnBoard()) {
 				if (!c.isEngaged()) {
-					if(!enemy.isBoardEmpty()){
-						Card cible=Finger.selectCard(enemy.getCardsOnBoard());
+					if (!enemy.isBoardEmpty()) {
+						Card cible = Finger.selectCard(enemy.getCardsOnBoard());
 						c.attack(cible);
-						if(c.isDead()){
+						if (c.isDead()) {
 							player.toGraveYard(c);
 						}
-						if(cible.isDead()){
+						if (cible.isDead()) {
 							enemy.toGraveYard(cible);
 						}
 						c.setEngagment(true);
-					}
-					else{
+					} else {
 						enemy.takeDamages(1);
 					}
-					
+
 				}
 
 			}
 		}
-		
+
 		System.out.println(player + "    " + player.getShield());
 		System.out.println(enemy + "    " + enemy.getShield());
 
 	}
-
-	
 
 	private void startDraw(Player player) {
 		for (int i = 0; i < START_HAND_SIZE; ++i)

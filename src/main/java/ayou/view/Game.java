@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import ayou.model.GameLoop;
+
 @SuppressWarnings("serial")
 public class Game extends Screen {
 
@@ -34,6 +36,8 @@ public class Game extends Screen {
 		panelGame.add(GameCanvas.getInstance());
 
 		panelGame.add(new Background());
+		
+		GameLoop.getInstance().start();
 
 		this.add(panelGame);
 	}

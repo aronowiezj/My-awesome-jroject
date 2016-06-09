@@ -1,13 +1,17 @@
 package ayou.view;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import ayou.controller.Finger;
+import ayou.model.Board;
 import ayou.model.Card;
 import ayou.model.GameLoop;
+import ayou.model.Hand;
 
 @SuppressWarnings("serial")
 public class GameCanvas extends JPanel implements Observer {
@@ -24,27 +28,44 @@ public class GameCanvas extends JPanel implements Observer {
 		setLayout(null);
 
 		hand1 = new JPanel();
-		initialize(hand1);
-		hand1.setBounds(Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 6 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6, VisualCard.HEIGHT);
+		initialize(hand1, Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 6 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6,
+				VisualCard.HEIGHT);
 
 		hand2 = new JPanel();
-		initialize(hand2);
-		hand2.setBounds(Viewer.SCREEN_WIDTH / 8, 10, Viewer.SCREEN_WIDTH / 8 * 6, VisualCard.HEIGHT);
+		initialize(hand2, Viewer.SCREEN_WIDTH / 8, 10, Viewer.SCREEN_WIDTH / 8 * 6, VisualCard.HEIGHT);
 
 		board1 = new JPanel();
-		initialize(board1);
-		board1.setBounds(Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 4 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6, VisualCard.HEIGHT);
+		initialize(board1, Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 4 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6,
+				VisualCard.HEIGHT);
 
 		board2 = new JPanel();
-		initialize(board2);
-		board2.setBounds(Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 2 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6, VisualCard.HEIGHT);
+		initialize(board2, Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 2 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6,
+				VisualCard.HEIGHT);
+
+		VisualCard visualPlayer1 = new VisualCard(new Card(0, "Hero1", null));
+		initialize(visualPlayer1, Viewer.SCREEN_WIDTH - VisualCard.WIDTH, Viewer.SCREEN_HEIGHT * 6 / 8 + 10,
+				VisualCard.WIDTH, VisualCard.HEIGHT);
+		visualPlayer1.setOpaque(true);
+		visualPlayer1.setBackground(Color.ORANGE);
+
+		VisualCard visualPlayer2 = new VisualCard(new Card(0, "Hero2", null));
+		initialize(visualPlayer2, 0, 10, VisualCard.WIDTH, VisualCard.HEIGHT);
+		visualPlayer2.setOpaque(true);
+		visualPlayer2.setBackground(Color.ORANGE);
+
+		VisualCard visualEndTurn = new VisualCard(new Card(0, "EndTurn", null));
+		initialize(visualEndTurn, Viewer.SCREEN_WIDTH - VisualCard.WIDTH,
+				Viewer.SCREEN_HEIGHT / 2 - VisualCard.HEIGHT / 2, VisualCard.WIDTH, VisualCard.HEIGHT);
+		visualEndTurn.setOpaque(true);
+		visualEndTurn.setBackground(Color.BLACK);
 
 		repaint();
 	}
 
-	private void initialize(JPanel panel) {
+	private void initialize(JPanel panel, int x, int y, int width, int height) {
 		panel.setLayout(null);
 		panel.setOpaque(false);
+		panel.setBounds(x, y, width, height);
 		this.add(panel);
 	}
 
@@ -55,58 +76,46 @@ public class GameCanvas extends JPanel implements Observer {
 		return instance;
 	}
 
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+	}
+
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		int i, size;
+	public void update(Observable observable, Object o) {
 
-		hand1.removeAll();
-		i = 0;
-		size = GameLoop.getInstance().getPlayer1().getHandSize();
-		for (Card card : GameLoop.getInstance().getPlayer1().getHand()) {
-			VisualCard visualCard = new VisualCard(card);
-			if (size == 1)
-				visualCard.setBounds(hand1.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			else
-				visualCard.setBounds((hand1.getWidth() - VisualCard.WIDTH) / (size - 1) * i++, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			hand1.add(visualCard);
+		if (observable instanceof Hand) {
+			Hand hand = (Hand) observable;
+			if (hand.getPlayer().equals(GameLoop.getInstance().getPlayer1())) {
+				manage(hand1, hand.getCards());
+			} else {
+				manage(hand2, hand.getCards());
+			}
 		}
+		if (observable instanceof Board) {
+			Board board = (Board) observable;
 
-		hand2.removeAll();
-		i = 0;
-		size = GameLoop.getInstance().getPlayer2().getHandSize();
-		for (Card card : GameLoop.getInstance().getPlayer2().getHand()) {
-			VisualCard visualCard = new VisualCard(card);
-			if (size == 1)
-				visualCard.setBounds(hand2.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
+			if (board.getPlayer() == GameLoop.getInstance().getPlayer1())
+				manage(board1, board.getCards());
 			else
-				visualCard.setBounds((hand2.getWidth() - VisualCard.WIDTH) / (size - 1) * i++, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			hand2.add(visualCard);
-		}
-
-		board1.removeAll();
-		i = 0;
-		size = GameLoop.getInstance().getPlayer1().getBoardSize();
-		for (Card card : GameLoop.getInstance().getPlayer1().getCardsOnBoard()) {
-			VisualCard visualCard = new VisualCard(card);
-			if (size == 1)
-				visualCard.setBounds(board1.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			else
-				visualCard.setBounds((board1.getWidth() - VisualCard.WIDTH) / (size - 1) * i++, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			board1.add(visualCard);
-		}
-
-		board2.removeAll();
-		i = 0;
-		size = GameLoop.getInstance().getPlayer2().getBoardSize();
-		for (Card card : GameLoop.getInstance().getPlayer2().getCardsOnBoard()) {
-			VisualCard visualCard = new VisualCard(card);
-			if (size == 1)
-				visualCard.setBounds(board2.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			else
-				visualCard.setBounds((board2.getWidth() - VisualCard.WIDTH) / (size - 1) * i++, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
-			board2.add(visualCard);
+				manage(board2, board.getCards());
 		}
 
 		repaint();
 	}
+
+	public void manage(JPanel panel, List<Card> cardList) {
+		panel.removeAll();
+		int i = 0;
+		for (Card card : cardList) {
+			VisualCard visualCard = new VisualCard(card);
+			if (cardList.size() == 1)
+				visualCard.setBounds(panel.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH,
+						VisualCard.HEIGHT);
+			else
+				visualCard.setBounds((panel.getWidth() - VisualCard.WIDTH) / (cardList.size() - 1) * i++, 0,
+						VisualCard.WIDTH, VisualCard.HEIGHT);
+			panel.add(visualCard);
+		}
+	}
+
 }

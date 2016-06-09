@@ -3,58 +3,18 @@
  */
 package ayou.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-
-import ayou.view.GameCanvas;
-
 /**
  * @author aronowij
  *
  */
-public class Hand extends Observable {
+public class Hand extends CardCollection {
 
-	private List<Card> cardList= new ArrayList<>();
+	// public Hand() {
+	// addObserver(GameCanvas.getInstance());
+	// }
 
-	private Player player;
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public Hand() {
-		addObserver(GameCanvas.getInstance());
-	}
-	
 	public Hand(Player player) {
-		this.player=player;
-		addObserver(GameCanvas.getInstance());
-	}
-	
-
-	public void addCard(Card card) {
-		cardList.add(card);
-		setChanged();
-		notifyObservers();
-	}
-
-	public void removeCard(Card card) {
-		cardList.remove(card);
-		setChanged();
-		notifyObservers();
-	}
-
-	public boolean isEmpty() {
-		return cardList.isEmpty();
-	}
-
-	public List<Card> getCards() {
-		return cardList;
-	}
-
-	public int size() {
-		return cardList.size();
+		super(player);
 	}
 
 }

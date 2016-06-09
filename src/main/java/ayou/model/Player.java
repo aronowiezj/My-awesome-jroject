@@ -2,14 +2,9 @@ package ayou.model;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ayou.view.Background;
-
 public class Player {
 
-	private Deck deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
+	private Deck deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE), this);
 	private Hand hand = new Hand(this);
 	private Board board = new Board(this);
 	private int shieldLevel = 5;
@@ -74,7 +69,7 @@ public class Player {
 		hand.removeCard(card);
 		card.invocation(this);
 		board.addCard(card);
-		
+
 	}
 
 	public void cleanBoard() {
@@ -82,7 +77,7 @@ public class Player {
 	}
 
 	public List<Card> getCardsOnBoard() {
-		
+
 		return board.getCards();
 	}
 
@@ -105,6 +100,10 @@ public class Player {
 				c.setEngagment(false);
 			}
 		}
+	}
+
+	public boolean equals(Player otherPlayer) {
+		return name.equals(otherPlayer.getName()) && id == otherPlayer.getID();
 	}
 
 }

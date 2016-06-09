@@ -4,10 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
-import java.util.Observable;
 
 import ayou.model.Card;
-import ayou.model.GameLoop;
 import ayou.view.VisualCard;
 
 public class Finger implements MouseMotionListener, MouseListener {
@@ -60,20 +58,20 @@ public class Finger implements MouseMotionListener, MouseListener {
 
 	private static Card privateSelectCard() {
 		isActive = true;
-		
-		while(selection == null){
+
+		while (selection == null) {
 			try {
 				Thread.sleep(0);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return selection;
 	}
-	
+
 	public static Card selectCard(List<Card> cardList) {
-		Card card =null;
+		Card card = null;
 		while (!cardList.contains(card))
 			card = Finger.privateSelectCard();
 		return card;
