@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import ayou.controller.Finger;
 import ayou.model.Card;
+import ayou.model.GameLoop;
 
 @SuppressWarnings("serial")
 public class VisualCard extends JPanel implements Observer {
@@ -19,6 +20,7 @@ public class VisualCard extends JPanel implements Observer {
 	private TextField name;
 	private TextField power;
 	private TextField life;
+	private TextField price;
 
 	private boolean lockable;
 	private boolean engaged;
@@ -33,19 +35,33 @@ public class VisualCard extends JPanel implements Observer {
 		card.addObserver(this);
 		name = new TextField(card.getName());
 		power = new TextField(card.getPower() + "");
-		life = new TextField(card.getHitPoints() + "");
+		life = new TextField();
+		price = new TextField(card.getCout() + "");
+		
+		if (card.getName().equals("Hero1")) {
+			life.setText(GameLoop.getInstance().getPlayer1().getShield() + "");
+		} else if (card.getName().equals("Hero2")) {
+			life.setText(GameLoop.getInstance().getPlayer2().getShield() + "");
+		} else
+			life.setText(card.getHitPoints() + "");
+		
 		name.setBounds(0, HEIGHT / 8, WIDTH, HEIGHT / 8 * 3);
-		power.setBounds(0, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
-		life.setBounds(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
-		colorize();
+		power.setBounds(0, HEIGHT / 2, WIDTH / 2, HEIGHT / 2 - 30);
+		life.setBounds(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2 - 30);
+		price.setBounds(0, HEIGHT - 30, WIDTH, 30);
+		
 		this.setLayout(null);
+		
 		this.add(name);
 		this.add(power);
 		this.add(life);
+		this.add(price);
+		
 		this.setSize(WIDTH, HEIGHT);
 		this.addMouseListener(Finger.getInstance());
-		if (card.isEngaged())
-			engaged = true;
+		
+		engaged = card.isEngaged();
+		colorize();
 	}
 
 	private void colorize() {
@@ -55,7 +71,7 @@ public class VisualCard extends JPanel implements Observer {
 		 * else if (handed) { if (playable) this.setBackground(Color.GREEN);
 		 * else this.setBackground(Color.GREEN); }
 		 */
-		else if (engaged)
+		else if (!engaged)
 			this.setBackground(Color.DARK_GRAY);
 		else
 			this.setBackground(Color.LIGHT_GRAY);
@@ -108,6 +124,11 @@ public class VisualCard extends JPanel implements Observer {
 	}
 
 	private void updateLife() {
-		life.setText(card.getHitPoints() + "");
+		if (card.getName().equals("Hero1")) {
+			life.setText(GameLoop.getInstance().getPlayer1().getShield() + "");
+		} else if (card.getName().equals("Hero2")) {
+			life.setText(GameLoop.getInstance().getPlayer2().getShield() + "");
+		} else
+			life.setText(card.getHitPoints() + "");
 	}
 }
