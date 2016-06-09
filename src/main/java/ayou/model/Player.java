@@ -100,6 +100,7 @@ public class Player {
 	}
 
 	public void disengage() {
+		hand.setPlayed(false);
 		if (!this.isBoardEmpty()) {
 			for (Card c : this.getCardsOnBoard()) {
 				c.setEngagment(false);

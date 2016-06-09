@@ -66,14 +66,16 @@ public class Finger implements MouseMotionListener, MouseListener {
 				e.printStackTrace();
 			}
 		}
-
-		return selection;
+		Card tmp=selection;
+		selection=null;
+		return tmp;
 	}
 
 	public static Card selectCard(List<Card> cardList) {
 		Card card = null;
-		while (!cardList.contains(card))
+		while (!cardList.contains(card)) {
 			card = Finger.soloSelectCard();
+		}
 		return card;
 	}
 }

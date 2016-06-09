@@ -160,7 +160,7 @@ public class Card {
 				for (Card card : player.getCardsOnBoard()) {
 					card.getHealed(healAlly);
 				}
-			} else {
+			} else if(!player.isBoardEmpty()){
 				Finger.selectCard(player.getCardsOnBoard()).getHealed(healAlly);
 			}
 		}
@@ -169,7 +169,7 @@ public class Card {
 				for (Card card : enemy.getCardsOnBoard()) {
 					card.getpowerBuffed(-debuffEnemy);
 				}
-			} else {
+			} else if(!enemy.isBoardEmpty()){
 				Finger.selectCard(GameLoop.getInstance().getPlayer2().getCardsOnBoard()).getpowerBuffed(-debuffEnemy);
 			}
 		}
@@ -178,7 +178,7 @@ public class Card {
 				for (Card card : player.getCardsOnBoard()) {
 					card.getpowerBuffed(buffAlly);
 				}
-			} else {
+			} else if(!player.isBoardEmpty()){
 				Finger.selectCard(player.getCardsOnBoard()).getpowerBuffed(buffAlly);
 			}
 		}

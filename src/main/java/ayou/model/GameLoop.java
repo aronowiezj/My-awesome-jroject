@@ -49,29 +49,27 @@ public class GameLoop extends Thread {
 	}
 
 	private void doTurn(Player player, Player enemy) {
-		System.out.println("Tour de : " + player.toString());
 		player.draw();
 		player.disengage();
-		boolean endOfTime=false;
-		
-		while(!endOfTime){
-			Card card=Finger.soloSelectCard();
-			if(card.getName().equals("EndTurn")){
-				endOfTime=true;
-			}
-			else if (player.getCardsOnBoard().contains(card)) {
-				if(card.canAttaque()&&!card.isEngaged()){
-					card.attack(Finger.selectCard(enemy.getCardsOnBoard()));
+		boolean endOfTime = false;
+		while (!endOfTime) {
+			Card card=null;
+			card = Finger.soloSelectCard();
+			if (card.getName().equals("EndTurn")) {
+				endOfTime = true;
+			} else if (player.getCardsOnBoard().contains(card)) {
+				System.out.println("CARD ON THE BOARD:"+card);
+				if (card.canAttaque() && !card.isEngaged()) {
+					System.out.println("CAN ATTACK:"+card);
+					Card cible=Finger.selectCard(enemy.getCardsOnBoard());
+					System.out.println("WILL ATTACK:"+cible);
+					card.attack(cible);
 				}
-			}
-			else if(player.getCardsFromHand().contains(card)&&!player.getHand().havePlayed()){
+			} else if (player.getCardsFromHand().contains(card) && !player.getHand().havePlayed()) {
 				player.invoke(card);
 			}
-		} 
-
-		System.out.println(player + "    " + player.getShield());
-		System.out.println(enemy + "    " + enemy.getShield());
-
+			
+		}
 	}
 
 	private void startDraw(Player player) {
