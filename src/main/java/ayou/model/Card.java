@@ -28,7 +28,7 @@ public class Card extends Observable {
 	private boolean buffAllAllies;
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
-	private int cout=0;
+	private int cout = 0;
 
 	public int getCout() {
 		return cout;
@@ -38,7 +38,7 @@ public class Card extends Observable {
 
 	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
 			int healAlly, boolean healAllAllies, int buffAlly, boolean buffAllAllies, int debuffEnemy,
-			boolean debuffAllEnemies) {
+			boolean debuffAllEnemies, int cout) {
 		this.idCard = idCard;
 		this.name = name;
 		this.idImg = "test";
@@ -57,10 +57,7 @@ public class Card extends Observable {
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
 		this.engagment = !celerity;
-		this.cout=power-5;
-		if (cout<0) {
-			cout=0;
-		}
+		this.cout = cout;
 	}
 
 	public Card(int idCard, String name, String idImg) {
@@ -87,8 +84,8 @@ public class Card extends Observable {
 	public Card() {
 
 	}
-	
-	public void addObserver(Observer observer){
+
+	public void addObserver(Observer observer) {
 		addObserver(observer);
 	}
 
@@ -139,12 +136,13 @@ public class Card extends Observable {
 	public String toString() {
 		return name + " : " + getPower() + " - " + hitPoints;
 	}
+
 	public void getHealed(int heal) {
-		 if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
-		 hitPoints += heal;
-		 } else {
-		 hitPoints = maxHitPoints+this.lifeBuffs;
-		 }
+		if (this.hitPoints + heal < this.maxHitPoints + this.lifeBuffs) {
+			hitPoints += heal;
+		} else {
+			hitPoints = maxHitPoints + this.lifeBuffs;
+		}
 
 	}
 
@@ -164,15 +162,15 @@ public class Card extends Observable {
 		} else {
 			enemy = GameLoop.getInstance().getPlayer1();
 		}
-		System.out.println("heal?????"+healAlly);
+		System.out.println("heal?????" + healAlly);
 		if (healAlly > 0) {
-			System.out.println("heal:"+healAlly);
+			System.out.println("heal:" + healAlly);
 			if (healAllAllies) {
 				System.out.println("HealAllAllies");
 				for (Card card : player.getCardsOnBoard()) {
 					card.getHealed(healAlly);
 				}
-			} else if(!player.isBoardEmpty()){
+			} else if (!player.isBoardEmpty()) {
 				Finger.selectCard(player.getCardsOnBoard()).getHealed(healAlly);
 			}
 		}
@@ -181,7 +179,7 @@ public class Card extends Observable {
 				for (Card card : enemy.getCardsOnBoard()) {
 					card.getpowerBuffed(-debuffEnemy);
 				}
-			} else if(!enemy.isBoardEmpty()){
+			} else if (!enemy.isBoardEmpty()) {
 				Finger.selectCard(GameLoop.getInstance().getPlayer2().getCardsOnBoard()).getpowerBuffed(-debuffEnemy);
 			}
 		}
@@ -190,7 +188,7 @@ public class Card extends Observable {
 				for (Card card : player.getCardsOnBoard()) {
 					card.getpowerBuffed(buffAlly);
 				}
-			} else if(!player.isBoardEmpty()){
+			} else if (!player.isBoardEmpty()) {
 				Finger.selectCard(player.getCardsOnBoard()).getpowerBuffed(buffAlly);
 			}
 		}
