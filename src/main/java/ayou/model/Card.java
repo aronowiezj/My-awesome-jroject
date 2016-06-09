@@ -71,8 +71,8 @@ public class Card {
 
 	public void attack(Card targetCard) {
 		if (canAttack) {
-			targetCard.setHitPoints(getpower());
-			setHitPoints(targetCard.getpower());
+			targetCard.setHitPoints(getPower());
+			setHitPoints(targetCard.getPower());
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class Card {
 		this.canAttack=canAttack;
 	}
 
-	public int getpower() {
+	public int getPower() {
 		return power + powerBuffs;
 	}
 
@@ -106,7 +106,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return name + " : " + getpower() + " - " + hitPoints;
+		return name + " : " + getPower() + " - " + hitPoints;
 	}
 
 	public void getHealed(int heal) {

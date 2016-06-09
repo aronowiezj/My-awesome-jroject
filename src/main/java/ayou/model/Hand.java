@@ -16,7 +16,7 @@ import ayou.view.GameCanvas;
 public class Hand extends Observable {
 
 	private List<Card> cardList;
-
+	
 	public Hand() {
 		cardList = new ArrayList<>();
 		addObserver(GameCanvas.getInstance());

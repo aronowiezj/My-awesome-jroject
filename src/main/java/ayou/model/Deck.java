@@ -9,7 +9,11 @@ import java.util.List;
  */
 public class Deck {
 
-	List<Card> cardList;
+	List<Card> cardList = null;
+	
+	public Deck(){
+		
+	}
 
 	public Deck(List<Card> cardList) {
 		this.cardList = cardList;
