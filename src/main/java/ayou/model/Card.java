@@ -1,12 +1,11 @@
 package ayou.model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import ayou.controller.Finger;
 
-/**
- * @author aronowij
- *
- */
-public class Card {
+public class Card extends Observable {
 
 	public static final int IMG_SIZE_X = 30;
 	public static final int IMG_SIZE_Y = 30;
@@ -78,6 +77,10 @@ public class Card {
 
 	public Card() {
 
+	}
+	
+	public void addObserver(Observer observer){
+		addObserver(observer);
 	}
 
 	public int getCardID() {

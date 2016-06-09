@@ -41,7 +41,7 @@ public class Menu extends Screen {
 
 		JPanel panelTitle = new JPanel();
 		panelTitle.setLayout(new FlowLayout(FlowLayout.CENTER));
-		JLabel titreLbl = new JLabel("My Awesome Project");
+		JLabel titreLbl = new JLabel("Hearth of Magic Duel");
 		titreLbl.setFont(new Font("Arial", Font.PLAIN, 80));
 		panelTitle.add(titreLbl);
 		this.add(panelTitle);

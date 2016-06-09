@@ -8,7 +8,7 @@ public class Viewer {
 
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = (System.getProperty("os.name")).equals("Linux") ? 720 : 700;
-	private JFrame frame = new JFrame("My Awesome Project");
+	private JFrame frame = new JFrame("Hearth of Magic Duel");
 
 	public Viewer() {
 		if ((System.getProperty("os.name")).equals("Linux"))
