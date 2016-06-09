@@ -132,6 +132,15 @@ public class Card extends Observable {
 
 	public void setHitPoints(int damages) {
 		hitPoints -= damages;
+		if(hitPoints<=0){
+			if(GameLoop.getInstance().getPlayer1().getCardsOnBoard().contains(this)){
+				GameLoop.getInstance().getPlayer1().getBoard().removeCard(this);
+			}
+			else{
+				GameLoop.getInstance().getPlayer2().getBoard().removeCard(this);
+			}
+		}
+		
 		setChanged();
 		notifyObservers(2);
 	}

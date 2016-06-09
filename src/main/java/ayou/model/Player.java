@@ -89,6 +89,10 @@ public class Player {
 	public int getBoardSize() {
 		return board.getCards().size();
 	}
+	
+	public Board getBoard() {
+		return board;
+	}
 
 	public void takeDamages(int damages) {
 		shieldLevel -= damages;
