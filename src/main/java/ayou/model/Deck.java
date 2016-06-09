@@ -1,5 +1,6 @@
 package ayou.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class Deck {
 
-	List<Card> cardList = null;
+	List<Card> cardList=new ArrayList<>();
 	
 	public Deck(){
 		

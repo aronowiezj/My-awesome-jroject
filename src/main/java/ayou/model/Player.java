@@ -5,12 +5,12 @@ import java.util.List;
 public class Player {
 
 	private Deck deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
-	private Hand hand = new Hand();
-	private Board board = new Board();
+	private Hand hand = new Hand(this);
+	private Board board = new Board(this);
 	private int shieldLevel = 5;
 	private String name = "";
 	private int id = 0;
-	private GraveYard graveYard = new GraveYard();
+	private GraveYard graveYard = new GraveYard(this);
 
 	public Player() {
 	}

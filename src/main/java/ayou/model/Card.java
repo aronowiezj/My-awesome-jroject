@@ -16,8 +16,8 @@ public class Card {
 	private int power;
 	private int powerBuffs;
 	private int maxHitPoints;
-	private int hitPoints;
 	private int lifeBuffs;
+	private int hitPoints;
 
 	private boolean canAttack;//can attack or never attack
 	private boolean celerity;
@@ -27,6 +27,7 @@ public class Card {
 	private boolean buffAllAllies;
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
+	
 	private boolean engagment=true;
 
 	public Card(int idCard, String name, String idImg, int power, int maxHitPoints, boolean canAtk, boolean celerity,
@@ -59,7 +60,7 @@ public class Card {
 		this.buffAllAllies = buffAllAllies;
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
-		this.engagment=celerity;
+		this.engagment=!celerity;
 	}
 
 	public Card(){

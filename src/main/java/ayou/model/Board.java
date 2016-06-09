@@ -10,7 +10,7 @@ public class Board extends Observable {
 
 	
 
-	private List<Card> cardList;
+	private List<Card> cardList=new ArrayList<>();
 	private Player player;
 	
 	public Player getPlayer() {
@@ -18,12 +18,12 @@ public class Board extends Observable {
 	}
 	
 	public Board() {
-		cardList = new ArrayList<>();
 		addObserver(GameCanvas.getInstance());
 	}
 	
 	public Board(Player player){
 		this.player=player;
+		addObserver(GameCanvas.getInstance());
 	}
 
 	public List<Card> getCards() {

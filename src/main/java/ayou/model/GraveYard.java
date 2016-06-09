@@ -11,6 +11,9 @@ public class GraveYard {
 	public Player getPlayer() {
 		return player;
 	}
+	public GraveYard(Player player){
+		this.player=player;
+	}
 
 	public List<Card> getCards() {
 		return cardList;

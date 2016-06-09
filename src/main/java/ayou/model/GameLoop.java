@@ -53,13 +53,14 @@ public class GameLoop extends Thread {
 	}
 
 	private void doTurn(Player player, Player enemy) {
-		System.out.println("Tour suivant");
+		System.out.println("Tour suivant"+player.toString());
 		player.draw();
 		player.disengage();
 		boolean putCard=false;
 		player.invoke(selectCard(player.getHand()));
 		
 		if (!player.isBoardEmpty()) {
+			System.out.println("BOARD: "+player.getBoardSize());
 			for (Card c : player.getBoard()) {
 				if (!c.isEngaged()) {
 					if(!enemy.isBoardEmpty()){
@@ -85,7 +86,7 @@ public class GameLoop extends Thread {
 	}
 
 	private Card selectCard(List<Card> cardList) {
-		Card card = null;
+		Card card =null;
 		while (!cardList.contains(card))
 			card = Finger.selectCard();
 		return card;
