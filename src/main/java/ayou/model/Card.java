@@ -1,5 +1,9 @@
 package ayou.model;
 
+import java.util.List;
+
+import ayou.controller.Finger;
+
 /**
  * @author aronowij
  *
@@ -141,34 +145,78 @@ public class Card {
 		}
 		if (healAlly > 0) {
 			if (healAllAllies) {
-				for (Card card : player.getBoard()) {
+				for (Card card : player.getCardsOnBoard()) {
 					card.getHealed(this.healAlly);
 				}
 			} else {
-
+				Finger.selectCard(player.getCardsOnBoard()).getHealed(healAlly);
 			}
 		}
 		if (debuffEnemy > 0) {
 			if (debuffAllEnemies) {
-				for (Card card : enemy.getBoard()) {
+				for (Card card : enemy.getCardsOnBoard()) {
 					card.getpowerBuffed(-debuffEnemy);
 				}
 			} else {
-
+				Finger.selectCard(GameLoop.getInstance().getPlayer2().getCardsOnBoard()).getpowerBuffed(-debuffEnemy);
 			}
 		}
 		if (buffAlly > 0) {
 			if (buffAllAllies) {
-				for (Card card : player.getBoard()) {
+				for (Card card : player.getCardsOnBoard()) {
 					card.getpowerBuffed(buffAlly);
 				}
 			} else {
-
+				Finger.selectCard(player.getCardsOnBoard()).getpowerBuffed(buffAlly);
 			}
 		}
 
 	}
 	
+
+	public int getLifeBuffs() {
+		return lifeBuffs;
+	}
+
+	public void setLifeBuffs(int lifeBuffs) {
+		this.lifeBuffs = lifeBuffs;
+	}
+
+	public int getIdCard() {
+		return idCard;
+	}
+
+	public String getIdImg() {
+		return idImg;
+	}
+
+	public boolean isCanAttack() {
+		return canAttack;
+	}
+
+	public int getHealAlly() {
+		return healAlly;
+	}
+
+	public boolean isHealAllAllies() {
+		return healAllAllies;
+	}
+
+	public int getBuffAlly() {
+		return buffAlly;
+	}
+
+	public boolean isBuffAllAllies() {
+		return buffAllAllies;
+	}
+
+	public int getDebuffEnemy() {
+		return debuffEnemy;
+	}
+
+	public boolean isDebuffAllEnemies() {
+		return debuffAllEnemies;
+	}
 
 	public boolean isDead() {
 		return hitPoints<=0;
@@ -181,4 +229,6 @@ public class Card {
 	public void setEngagment(boolean engagment){
 		this.engagment=engagment;
 	}
+	
+	
 }

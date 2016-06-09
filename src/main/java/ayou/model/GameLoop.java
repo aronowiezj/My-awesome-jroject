@@ -57,14 +57,14 @@ public class GameLoop extends Thread {
 		player.draw();
 		player.disengage();
 		boolean putCard=false;
-		player.invoke(selectCard(player.getHand()));
+		player.invoke(Finger.selectCard(player.getHand()));
 		
 		if (!player.isBoardEmpty()) {
 			System.out.println("BOARD: "+player.getBoardSize());
-			for (Card c : player.getBoard()) {
+			for (Card c : player.getCardsOnBoard()) {
 				if (!c.isEngaged()) {
 					if(!enemy.isBoardEmpty()){
-						Card cible=selectCard(enemy.getBoard());
+						Card cible=Finger.selectCard(enemy.getCardsOnBoard());
 						c.attack(cible);
 						if(c.isDead()){
 							player.toGraveYard(c);
@@ -73,6 +73,9 @@ public class GameLoop extends Thread {
 							enemy.toGraveYard(cible);
 						}
 						c.setEngagment(true);
+					}
+					else{
+						enemy.takeDamages(1);
 					}
 					
 				}
@@ -85,12 +88,7 @@ public class GameLoop extends Thread {
 
 	}
 
-	private Card selectCard(List<Card> cardList) {
-		Card card =null;
-		while (!cardList.contains(card))
-			card = Finger.selectCard();
-		return card;
-	}
+	
 
 	private void startDraw(Player player) {
 		for (int i = 0; i < START_HAND_SIZE; ++i)

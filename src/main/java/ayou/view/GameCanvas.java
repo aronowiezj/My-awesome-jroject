@@ -86,7 +86,7 @@ public class GameCanvas extends JPanel implements Observer {
 		board1.removeAll();
 		i = 0;
 		size = GameLoop.getInstance().getPlayer1().getBoardSize();
-		for (Card card : GameLoop.getInstance().getPlayer1().getBoard()) {
+		for (Card card : GameLoop.getInstance().getPlayer1().getCardsOnBoard()) {
 			VisualCard visualCard = new VisualCard(card);
 			if (size == 1)
 				visualCard.setBounds(board1.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);
@@ -98,7 +98,7 @@ public class GameCanvas extends JPanel implements Observer {
 		board2.removeAll();
 		i = 0;
 		size = GameLoop.getInstance().getPlayer2().getBoardSize();
-		for (Card card : GameLoop.getInstance().getPlayer2().getBoard()) {
+		for (Card card : GameLoop.getInstance().getPlayer2().getCardsOnBoard()) {
 			VisualCard visualCard = new VisualCard(card);
 			if (size == 1)
 				visualCard.setBounds(board2.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH, VisualCard.HEIGHT);

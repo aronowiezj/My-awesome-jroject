@@ -3,6 +3,7 @@ package ayou.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 import java.util.Observable;
 
 import ayou.model.Card;
@@ -57,7 +58,7 @@ public class Finger implements MouseMotionListener, MouseListener {
 	public void mouseReleased(MouseEvent e) {
 	}
 
-	public static Card selectCard() {
+	private static Card privateSelectCard() {
 		isActive = true;
 		
 		while(selection == null){
@@ -69,5 +70,12 @@ public class Finger implements MouseMotionListener, MouseListener {
 		}
 		
 		return selection;
+	}
+	
+	public static Card selectCard(List<Card> cardList) {
+		Card card =null;
+		while (!cardList.contains(card))
+			card = Finger.privateSelectCard();
+		return card;
 	}
 }

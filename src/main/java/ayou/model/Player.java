@@ -2,6 +2,11 @@ package ayou.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ayou.view.Background;
+
 public class Player {
 
 	private Deck deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
@@ -75,7 +80,8 @@ public class Player {
 		board.clean();
 	}
 
-	public List<Card> getBoard() {
+	public List<Card> getCardsOnBoard() {
+		
 		return board.getCards();
 	}
 
@@ -94,7 +100,7 @@ public class Player {
 
 	public void disengage() {
 		if (!this.isBoardEmpty()) {
-			for (Card c : this.getBoard()) {
+			for (Card c : this.getCardsOnBoard()) {
 				c.setEngagment(false);
 			}
 		}
