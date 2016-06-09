@@ -25,6 +25,10 @@ public class Card extends Observable {
 	private boolean healAllAllies;
 	private int buffAlly;
 	private boolean buffAllAllies;
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
 	private int cout = 0;
@@ -180,11 +184,8 @@ public class Card extends Observable {
 		} else {
 			enemy = GameLoop.getInstance().getPlayer1();
 		}
-		System.out.println("heal?????" + healAlly);
 		if (healAlly > 0) {
-			System.out.println("heal:" + healAlly);
 			if (healAllAllies) {
-				System.out.println("HealAllAllies");
 				for (Card card : player.getCardsOnBoard()) {
 					card.getHealed(healAlly);
 				}

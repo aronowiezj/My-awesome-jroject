@@ -67,7 +67,7 @@ public class CardRessource {
     @Path("/random")
     public CardEntity getNbCard(){
 		int max = dao.countCard();
-		return dao.findCardById((int)(Math.random()*max));
+		return dao.findCardById((int)(Math.random()*max)+1);
     }
     
 	@GET

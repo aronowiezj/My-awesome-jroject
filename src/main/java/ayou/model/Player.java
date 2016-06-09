@@ -95,8 +95,9 @@ public class Player {
 	}
 
 	public void takeDamages(int damages) {
+		System.out.print(this.toString()+" take a damage and have");
 		shieldLevel -= damages;
-
+		System.out.println(shieldLevel+" shield");
 	}
 
 	public int getShield() {

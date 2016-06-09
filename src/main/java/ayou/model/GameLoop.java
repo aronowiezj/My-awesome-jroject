@@ -53,44 +53,48 @@ public class GameLoop extends Thread {
 		player.disengage();
 		boolean endOfTime = false;
 		while (!endOfTime) {
-			Card card=null;
+			Card card = null;
 			card = Finger.soloSelectCard();
 			if (card.getName().equals("EndTurn")) {
 				endOfTime = true;
 			} else if (player.getCardsOnBoard().contains(card)) {
 				if (card.canAttaque() && !card.isEngaged()) {
-					Card cible = null;
-					for(Card c :enemy.getCardsOnBoard())
+					Card cible = new Card();
+					cible.setName("v");
+					for (Card c : enemy.getCardsOnBoard())
 						c.lockable();
-					while (!enemy.getCardsOnBoard().contains(cible)&&!cible.getName().equals("Hero1")&&!cible.getName().equals("Hero2")){
-						if (!enemy.getCardsOnBoard().contains(cible)) {
-							cible = Finger.soloSelectCard();
-						}else
+					while (!enemy.getCardsOnBoard().contains(cible) && !cible.getName().equals("Hero1")
+							&& !cible.getName().equals("Hero2")) {
+						cible = Finger.soloSelectCard();
+						System.out.println("coucou");
+						if ((cible.getName().equals("Hero1") || cible.getName().equals("Hero2"))){
 							enemy.takeDamages(1);
+							System.out.println("haricot");
+						}
 					}
-						
-					for(Card c : enemy.getCardsOnBoard())
+
+					for (Card c : enemy.getCardsOnBoard())
 						c.nonlockable();
 					card.attack(cible);
+					System.out.println("Tomates");
 					card.setEngagment(true);
 				}
 			} else if (player.getCardsFromHand().contains(card) && !player.getHand().havePlayed()) {
-				if(card.getCout()==0){
+				if (card.getCout() == 0) {
 					player.invoke(card);
-				}else {
-					if(card.getCout()<=player.getBoardSize()){
+				} else {
+					if (card.getCout() <= player.getBoardSize()) {
 						for (int i = 0; i < card.getCout(); i++) {
-							Card sacrifice=Finger.selectCard(player.getCardsOnBoard());
+							Card sacrifice = Finger.selectCard(player.getCardsOnBoard());
 							player.getCardsOnBoard().remove(sacrifice);
 						}
 						player.invoke(card);
-					}
-					else
+					} else
 						System.err.println("TROP CHER POUR TOI, BIATCH");
 				}
-				
+
 			}
-			
+
 		}
 	}
 
