@@ -59,7 +59,13 @@ public class GameLoop extends Thread {
 				endOfTime = true;
 			} else if (player.getCardsOnBoard().contains(card)) {
 				if (card.canAttaque() && !card.isEngaged()) {
-					Card cible=Finger.selectCard(enemy.getCardsOnBoard());
+					Card cible = null;
+					for(Card c :enemy.getCardsOnBoard())
+						c.lockable();
+					while (!enemy.getCardsOnBoard().contains(cible)||cible.getName().equals("Hero1")||cible.getName().equals("Hero2"))
+						cible = Finger.soloSelectCard();
+					for(Card c : enemy.getCardsOnBoard())
+						c.nonlockable();
 					card.attack(cible);
 					card.setEngagment(true);
 				}

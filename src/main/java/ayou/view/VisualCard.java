@@ -66,7 +66,7 @@ public class VisualCard extends JPanel implements Observer {
 		 * else if (handed) { if (playable) this.setBackground(Color.GREEN);
 		 * else this.setBackground(Color.GREEN); }
 		 */
-		else if (!engaged)
+		else if (engaged)
 			this.setBackground(Color.DARK_GRAY);
 		else
 			this.setBackground(Color.LIGHT_GRAY);
