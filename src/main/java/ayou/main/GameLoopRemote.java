@@ -27,8 +27,8 @@ public class GameLoopRemote {
 			System.out.println(p.getName());
 			//////
 			
-			List<Player> player = ClientBuilder.newClient().target("http://localhost:8080/v1/player").request().get(new GenericType<List<Player>>(){});
-			System.out.println(player);
+			CardEntity card = ClientBuilder.newClient().target("http://localhost:8080/v1/card/5").request().get(CardEntity.class);
+			System.out.println(card.getCout());
 			
 			try {
 				Thread.sleep(100);
