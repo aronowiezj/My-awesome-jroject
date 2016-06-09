@@ -72,8 +72,9 @@ public class Player {
 
 	public void invoke(Card card) {
 		hand.removeCard(card);
-		board.addCard(card);
 		card.invocation(this);
+		board.addCard(card);
+		
 	}
 
 	public void cleanBoard() {

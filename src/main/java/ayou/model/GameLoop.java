@@ -53,7 +53,7 @@ public class GameLoop extends Thread {
 	}
 
 	private void doTurn(Player player, Player enemy) {
-		System.out.println("Tour suivant"+player.toString());
+		System.out.println("Tour de : "+player.toString());
 		player.draw();
 		player.disengage();
 		boolean putCard=false;

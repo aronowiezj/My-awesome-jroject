@@ -25,7 +25,7 @@ public class Card {
 
 	private boolean canAttack;//can attack or never attack
 	private boolean celerity;
-	private int healAlly;
+	private int healAlly=100;
 	private boolean healAllAllies;
 	private int buffAlly;
 	private boolean buffAllAllies;
@@ -44,16 +44,16 @@ public class Card {
 		this.maxHitPoints = maxHitPoints;
 		this.hitPoints = maxHitPoints;
 		this.name = name;
-		powerBuffs = 0;
-		lifeBuffs = 0;
-		canAttack = true;
-		celerity = false;
-		healAlly = 0;
-		healAllAllies = false;
-		buffAlly = 0;
-		buffAllAllies = false;
-		debuffEnemy = 0;
-		debuffAllEnemies = false;
+		this.powerBuffs = 0;
+		this.lifeBuffs = 0;
+		this.canAttack = true;
+		this.celerity = false;
+		this.healAlly = 5;
+		this.healAllAllies = true;
+		this.buffAlly = 0;
+		this.buffAllAllies = false;
+		this.debuffEnemy = 0;
+		this.debuffAllEnemies = false;
 		this.powerBuffs = 0;
 		this.lifeBuffs = 0;
 		this.canAttack = canAtk;
@@ -121,11 +121,12 @@ public class Card {
 	}
 
 	public void getHealed(int heal) {
-		if (this.hitPoints + heal < this.maxHitPoints) {
-			hitPoints += heal;
-		} else {
-			hitPoints = maxHitPoints;
-		}
+//		if (this.hitPoints + heal < this.maxHitPoints+this.lifeBuffs) {
+//			hitPoints += heal;
+//		} else {
+//			hitPoints = maxHitPoints;
+//		}
+		hitPoints+=heal;
 	}
 
 	// @copyright
@@ -137,6 +138,7 @@ public class Card {
 	}
 
 	public void invocation(Player player) {
+		System.out.println("invocation");
 		Player enemy;
 		if (player == GameLoop.getInstance().getPlayer1()) {
 			enemy = GameLoop.getInstance().getPlayer2();
@@ -144,9 +146,10 @@ public class Card {
 			enemy = GameLoop.getInstance().getPlayer1();
 		}
 		if (healAlly > 0) {
+			System.out.println("heal");
 			if (healAllAllies) {
 				for (Card card : player.getCardsOnBoard()) {
-					card.getHealed(this.healAlly);
+					card.getHealed(healAlly);
 				}
 			} else {
 				Finger.selectCard(player.getCardsOnBoard()).getHealed(healAlly);
