@@ -11,7 +11,7 @@ public class GameLoopRemote {
 	
 	public static void main(String[] args) {
 		while (true) {
-			Entity<Player> userEntity = Entity.entity(new Player("OreWa", false), MediaType.APPLICATION_JSON);
+			Entity<Player> userEntity = Entity.entity(new Player("OreWa"), MediaType.APPLICATION_JSON);
 			
 			ClientBuilder.newClient()
 					.target("http://localhost:8080/v1/player")

@@ -34,8 +34,8 @@ public class GameLoop extends Thread {
 	}
 
 	public void run() {
-		player1 = new Player("Player1", true);
-		player2 = new Player("Player2", false);
+		player1 = new Player("Player1");
+		player2 = new Player("Player2");
 
 		startDraw(player1);
 		startDraw(player2);

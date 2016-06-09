@@ -15,10 +15,10 @@ public class Player {
 
 	}
 
-	public Player(String name, boolean isPlayer) {
+	public Player(String name) {
 		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
 		hand = new Hand();
-		board = new Board(isPlayer);
+		board = new Board();
 		this.name = name;
 		shieldLevel = 5;
 	}

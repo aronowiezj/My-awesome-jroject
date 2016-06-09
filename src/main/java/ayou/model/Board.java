@@ -9,11 +9,9 @@ import ayou.view.GameCanvas;
 public class Board extends Observable {
 
 	private List<Card> cardList;
-	boolean isPlayer;
 
-	public Board(boolean isPlayer) {
+	public Board() {
 		cardList = new ArrayList<>();
-		this.isPlayer = isPlayer;
 		addObserver(GameCanvas.getInstance());
 	}
 
