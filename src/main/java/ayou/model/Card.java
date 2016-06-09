@@ -28,6 +28,11 @@ public class Card extends Observable {
 	private boolean buffAllAllies;
 	private int debuffEnemy;
 	private boolean debuffAllEnemies;
+	private int cout=0;
+
+	public int getCout() {
+		return cout;
+	}
 
 	private boolean engagment = true;
 
@@ -52,6 +57,10 @@ public class Card extends Observable {
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
 		this.engagment = !celerity;
+		this.cout=power-5;
+		if (cout<0) {
+			cout=0;
+		}
 	}
 
 	public Card(int idCard, String name, String idImg) {

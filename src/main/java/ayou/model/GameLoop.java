@@ -58,15 +58,25 @@ public class GameLoop extends Thread {
 			if (card.getName().equals("EndTurn")) {
 				endOfTime = true;
 			} else if (player.getCardsOnBoard().contains(card)) {
-				System.out.println("CARD ON THE BOARD:"+card);
 				if (card.canAttaque() && !card.isEngaged()) {
-					System.out.println("CAN ATTACK:"+card);
 					Card cible=Finger.selectCard(enemy.getCardsOnBoard());
-					System.out.println("WILL ATTACK:"+cible);
 					card.attack(cible);
 				}
 			} else if (player.getCardsFromHand().contains(card) && !player.getHand().havePlayed()) {
-				player.invoke(card);
+				if(card.getCout()==0){
+					player.invoke(card);
+				}else {
+					if(card.getCout()<=player.getBoardSize()){
+						for (int i = 0; i < card.getCout(); i++) {
+							Card sacrifice=Finger.selectCard(player.getCardsOnBoard());
+							player.getCardsOnBoard().remove(sacrifice);
+						}
+						player.invoke(card);
+					}
+					else
+						System.err.println("TROP CHER POUR TOI, BIATCH");
+				}
+				
 			}
 			
 		}
