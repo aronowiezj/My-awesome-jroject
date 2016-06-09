@@ -61,6 +61,7 @@ public class GameLoop extends Thread {
 				if (card.canAttaque() && !card.isEngaged()) {
 					Card cible=Finger.selectCard(enemy.getCardsOnBoard());
 					card.attack(cible);
+					card.setEngagment(true);
 				}
 			} else if (player.getCardsFromHand().contains(card) && !player.getHand().havePlayed()) {
 				if(card.getCout()==0){
