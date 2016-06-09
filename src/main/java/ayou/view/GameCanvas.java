@@ -42,6 +42,10 @@ public class GameCanvas extends JPanel implements Observer {
 		initialize(board2, Viewer.SCREEN_WIDTH / 8, Viewer.SCREEN_HEIGHT * 2 / 8 + 10, Viewer.SCREEN_WIDTH / 8 * 6,
 				VisualCard.HEIGHT);
 
+		repaint();
+	}
+	
+	public void createPlayers(){
 		VisualCard visualPlayer1 = new VisualCard(new Card(0, "Hero1", null));
 		initialize(visualPlayer1, Viewer.SCREEN_WIDTH - VisualCard.WIDTH, Viewer.SCREEN_HEIGHT * 6 / 8 + 10,
 				VisualCard.WIDTH, VisualCard.HEIGHT);
@@ -56,10 +60,10 @@ public class GameCanvas extends JPanel implements Observer {
 		VisualCard visualEndTurn = new VisualCard(new Card(0, "EndTurn", null));
 		initialize(visualEndTurn, Viewer.SCREEN_WIDTH - VisualCard.WIDTH,
 				Viewer.SCREEN_HEIGHT / 2 - VisualCard.HEIGHT / 2, VisualCard.WIDTH, VisualCard.HEIGHT);
-		visualEndTurn.setOpaque(true);
-		visualEndTurn.setBackground(Color.BLACK);
+		
 
-		repaint();
+		visualEndTurn.setOpaque(true);
+		visualEndTurn.setBackground(Color.BLACK);		
 	}
 
 	private void initialize(JPanel panel, int x, int y, int width, int height) {

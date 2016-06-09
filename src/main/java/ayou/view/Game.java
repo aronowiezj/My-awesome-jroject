@@ -36,8 +36,10 @@ public class Game extends Screen {
 		panelGame.add(GameCanvas.getInstance());
 
 		panelGame.add(new Background());
-		
+
 		GameLoop.getInstance().start();
+		
+		GameCanvas.getInstance().createPlayers();
 
 		this.add(panelGame);
 	}

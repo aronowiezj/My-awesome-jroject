@@ -38,12 +38,7 @@ public class VisualCard extends JPanel implements Observer {
 		life = new TextField();
 		price = new TextField(card.getCout() + "");
 		
-		if (card.getName().equals("Hero1")) {
-			life.setText(GameLoop.getInstance().getPlayer1().getShield() + "");
-		} else if (card.getName().equals("Hero2")) {
-			life.setText(GameLoop.getInstance().getPlayer2().getShield() + "");
-		} else
-			life.setText(card.getHitPoints() + "");
+		life.setText(card.getHitPoints() + "");
 		
 		name.setBounds(0, HEIGHT / 8, WIDTH, HEIGHT / 8 * 3);
 		power.setBounds(0, HEIGHT / 2, WIDTH / 2, HEIGHT / 2 - 30);
