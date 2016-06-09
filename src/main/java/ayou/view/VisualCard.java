@@ -15,6 +15,7 @@ public class VisualCard extends JPanel {
 	public final static int HEIGHT = 150;
 
 	private Card card;
+	private Color currentColor;
 
 	public VisualCard(Card card) {
 		this.card = card;
@@ -24,13 +25,25 @@ public class VisualCard extends JPanel {
 		name.setBounds(0, HEIGHT / 8, WIDTH, HEIGHT / 8 * 3);
 		power.setBounds(0, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
 		life.setBounds(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
-		this.setBackground(Color.BLUE);
+		if(card.isEngaged())
+			this.setBackground(Color.GREEN);
+		else
+			this.setBackground(Color.BLUE);
 		this.setLayout(null);
 		this.add(name);
 		this.add(power);
 		this.add(life);
 		this.setSize(WIDTH, HEIGHT);
 		this.addMouseListener(Finger.getInstance());
+	}
+	
+	public void lockable(){
+		currentColor = this.getBackground();
+		this.setBackground(Color.RED);
+	}
+	
+	public void unlockable(){
+		this.setBackground(currentColor);
 	}
 
 	public Card getCard() {
