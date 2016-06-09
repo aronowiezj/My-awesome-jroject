@@ -62,8 +62,13 @@ public class GameLoop extends Thread {
 					Card cible = null;
 					for(Card c :enemy.getCardsOnBoard())
 						c.lockable();
-					while (!enemy.getCardsOnBoard().contains(cible)||cible.getName().equals("Hero1")||cible.getName().equals("Hero2"))
-						cible = Finger.soloSelectCard();
+					while (!enemy.getCardsOnBoard().contains(cible)&&!cible.getName().equals("Hero1")&&!cible.getName().equals("Hero2")){
+						if (!enemy.getCardsOnBoard().contains(cible)) {
+							cible = Finger.soloSelectCard();
+						}else
+							enemy.takeDamages(1);
+					}
+						
 					for(Card c : enemy.getCardsOnBoard())
 						c.nonlockable();
 					card.attack(cible);
