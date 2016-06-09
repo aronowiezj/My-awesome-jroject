@@ -4,23 +4,18 @@ import java.util.List;
 
 public class Player {
 
-	private Deck deck;
-	private Hand hand;
-	private Board board;
-	private int shieldLevel;
-	private String name;
-	private int id;
+	private Deck deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
+	private Hand hand = new Hand();
+	private Board board = new Board();
+	private int shieldLevel = 5;
+	private String name = "";
+	private int id = 0;
 
 	public Player() {
-
 	}
 
 	public Player(String name) {
-		deck = new Deck(RandomCardFactory.genereRandomDeck(GameLoop.DECK_SIZE));
-		hand = new Hand();
-		board = new Board();
 		this.name = name;
-		shieldLevel = 5;
 	}
 
 	public void draw() {
