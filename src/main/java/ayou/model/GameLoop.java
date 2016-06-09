@@ -52,95 +52,24 @@ public class GameLoop extends Thread {
 
 	}
 
-	// private void doTurn(Player player, Player enemy) {
-	// player.draw();
-	//
-	// System.out.println(player + " hand :");
-	// Displayer.display(player.getHand());
-	// System.out.println();
-	//
-	// if (player.isBoardEmpty())
-	// player.invoke(player.getHand().get(Integer.parseInt(new
-	// Scanner(System.in).nextLine()) - 1));
-	//
-	// System.out.println(player + " board :");
-	// System.out.println(player.getBattler());
-	// if (!enemy.isBoardEmpty()) {
-	// System.out.println(enemy + " board :");
-	// System.out.println(enemy.getBattler());
-	// }
-	// System.out.println();
-	//
-	// if (!enemy.isBoardEmpty()) {
-	// player.getBattler().attack(enemy.getBattler());
-	// Displayer.attackCard(player.getBattler(), enemy.getBattler());
-	// if (player.getBattler().getHitPoints() <= 0) {
-	// player.takeDamages(1);
-	// Displayer.die(player.getBattler());
-	// player.cleanBoard();
-	// }
-	// if (enemy.getBattler().getHitPoints() <= 0) {
-	// enemy.takeDamages(1);
-	// Displayer.die(enemy.getBattler());
-	// enemy.cleanBoard();
-	// }
-	// }
-	// System.out.println(player + " " + player.getShield());
-	// System.out.println(enemy + " " + enemy.getShield());
-	// }
 	private void doTurn(Player player, Player enemy) {
-		// logger.debug(player.toString() + " vs " + enemy.toString());
 		player.draw();
-		// logger.debug("hand : " + Displayer.buildCards(player.getHand()));
-
-		System.out.println(player + " hand :");
-		Displayer.display(player.getHand());
-		System.out.println();
-
-		System.out.println("Quelle carte jouer?");
-		
+		boolean putCard=false;
 		player.invoke(selectCard(player.getHand()));
 
-		System.out.println(player + " board :");
-		System.out.println(player.getBoard());
-		if (!enemy.isBoardEmpty()) {
-			System.out.println(enemy + " board :");
-			System.out.println(enemy.getBattler());
-		}
-		System.out.println();
-
-		// if (!enemy.isBoardEmpty()) {
-		//
-		// player.invoke(player.getHand().get(Integer.parseInt(new
-		// Scanner(System.in).nextLine()) - 1));
-		// player.getBattler().attack(enemy.getBattler());
-		// Displayer.attackCard(player.getBattler(), enemy.getBattler());
-		// if (player.getBattler().getHitPoints() <= 0) {
-		// player.takeDamages(1);
-		// Displayer.die(player.getBattler());
-		// player.cleanBoard();
-		// }
-		// if (enemy.getBattler().getHitPoints() <= 0) {
-		// enemy.takeDamages(1);
-		// Displayer.die(enemy.getBattler());
-		// enemy.cleanBoard();
-		// }
-		// }
 		for (Card c : player.getBoard()) {
-			// if (c.isCanAttack()) {
-			System.out.println("Qui attaquer? 0 pour le héros");
-			int cible = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
-			if (cible >= 0) {
-				if (cible < enemy.getBoard().size()) {
-					c.attack(enemy.getBoard().get(cible));
+			if (c.isCelerity()) {
+				Card cible=selectCard(enemy.getBoard());
+				c.attack(cible);
+				if(c.isDead()){
+					player.toGraveYard(c);
 				}
-
-			} else {
-				enemy.takeDamages(1);
+				if(cible.isDead()){
+					enemy.toGraveYard(cible);
+				}
+			}else {
+				c.setCelerity(true);
 			}
-			// } else {
-			// c.setCanAttack(true);
-			// }
 
 		}
 		System.out.println(player + "    " + player.getShield());
@@ -150,7 +79,7 @@ public class GameLoop extends Thread {
 
 	private Card selectCard(List<Card> cardList) {
 		Card card = null;
-		while(!cardList.contains(card))
+		while (!cardList.contains(card))
 			card = Finger.selectCard();
 		return card;
 	}

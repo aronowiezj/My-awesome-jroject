@@ -19,7 +19,7 @@ public class Card {
 	private int hitPoints;
 	private int lifeBuffs;
 
-	private boolean canAttack;
+	private boolean canAttack;//can attack or never attack
 	private boolean celerity;
 	private int healAlly;
 	private boolean healAllAllies;
@@ -58,7 +58,6 @@ public class Card {
 		this.buffAllAllies = buffAllAllies;
 		this.debuffEnemy = debuffEnemy;
 		this.debuffAllEnemies = debuffAllEnemies;
-		canAttack = celerity;
 	}
 
 	public int getCardID() {
@@ -76,8 +75,13 @@ public class Card {
 		return canAttack;
 	}
 	
-	public void nowCanAttaque(boolean canAttack){
-		this.canAttack=canAttack;
+
+	public boolean isCelerity() {
+		return celerity;
+	}
+
+	public void setCelerity(boolean celerity) {
+		this.celerity = celerity;
 	}
 
 	public int getPower() {
@@ -156,5 +160,9 @@ public class Card {
 			}
 		}
 
+	}
+
+	public boolean isDead() {
+		return hitPoints<=0;
 	}
 }

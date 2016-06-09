@@ -9,7 +9,7 @@ import ayou.model.Card;
 import ayou.model.GameLoop;
 import ayou.view.VisualCard;
 
-public class Finger/*extends Thread*/ implements MouseMotionListener, MouseListener {
+public class Finger implements MouseMotionListener, MouseListener {
 
 	private static Finger instance;
 	private static boolean isActive;

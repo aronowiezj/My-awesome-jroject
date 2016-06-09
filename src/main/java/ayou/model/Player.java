@@ -10,6 +10,7 @@ public class Player {
 	private int shieldLevel = 5;
 	private String name = "";
 	private int id = 0;
+	private GraveYard graveYard=new GraveYard();
 
 	public Player() {
 	}
@@ -20,6 +21,11 @@ public class Player {
 
 	public void draw() {
 		hand.addCard(deck.draw());
+	}
+	
+	public void toGraveYard(Card card){
+		this.graveYard.addCard(card);
+		this.board.removeCard(card);
 	}
 
 	public boolean isDefeated() {
@@ -65,11 +71,6 @@ public class Player {
 		card.invocation(this);
 	}
 
-	// deprecated
-	public Card getBattler() {
-		return board.getBattler();
-	}
-
 	public void cleanBoard() {
 		board.clean();
 	}
@@ -77,6 +78,7 @@ public class Player {
 	public List<Card> getBoard() {
 		return board.getCards();
 	}
+	
 	
 	public int getBoardSize() {
 		return board.getCards().size();
