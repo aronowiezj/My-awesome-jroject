@@ -8,7 +8,6 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
 import ayou.model.Board;
 import ayou.model.Card;
@@ -82,6 +81,27 @@ public class GameCanvas extends JPanel implements Observer {
 		visualEndTurn.setBackground(Color.BLACK);		
 	}
 
+	
+//	public void createPlayers(){
+//		BeautifulCard visualPlayer1 = new BeautifulCard(new Card(0, "Hero1", null));
+//		initialize(visualPlayer1, Viewer.SCREEN_WIDTH - VisualCard.WIDTH, Viewer.SCREEN_HEIGHT * 6 / 8 + 10,
+//				VisualCard.WIDTH, VisualCard.HEIGHT);
+//		visualPlayer1.setOpaque(true);
+//		visualPlayer1.setBackground(Color.ORANGE);
+//
+//		BeautifulCard visualPlayer2 = new BeautifulCard(new Card(0, "Hero2", null));
+//		initialize(visualPlayer2, 0, 10, VisualCard.WIDTH, VisualCard.HEIGHT);
+//		visualPlayer2.setOpaque(true);
+//		visualPlayer2.setBackground(Color.ORANGE);
+//
+//		BeautifulCard visualEndTurn = new BeautifulCard(new Card(0, "EndTurn", null));
+//		initialize(visualEndTurn, Viewer.SCREEN_WIDTH - VisualCard.WIDTH,
+//				Viewer.SCREEN_HEIGHT / 2 - VisualCard.HEIGHT / 2, VisualCard.WIDTH, VisualCard.HEIGHT);
+//		
+//
+//		visualEndTurn.setOpaque(true);
+//		visualEndTurn.setBackground(Color.BLACK);		
+//	}
 	private void initialize(JPanel panel, int x, int y, int width, int height) {
 		panel.setLayout(null);
 		panel.setOpaque(false);
@@ -123,11 +143,27 @@ public class GameCanvas extends JPanel implements Observer {
 		repaint();
 	}
 
+//	public void manage(JPanel panel, List<Card> cardList) {
+//		panel.removeAll();
+//		int i = 0;
+//		for (Card card : cardList) {
+//			VisualCard visualCard = new VisualCard(card);
+//			if (cardList.size() == 1)
+//				visualCard.setBounds(panel.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH,
+//						VisualCard.HEIGHT);
+//			else
+//				visualCard.setBounds((panel.getWidth() - VisualCard.WIDTH) / (cardList.size() - 1) * i++, 0,
+//						VisualCard.WIDTH, VisualCard.HEIGHT);
+//			panel.add(visualCard);
+//		}
+//	}
+	
+	
 	public void manage(JPanel panel, List<Card> cardList) {
 		panel.removeAll();
 		int i = 0;
 		for (Card card : cardList) {
-			VisualCard visualCard = new VisualCard(card);
+			BeautifulCard visualCard = new BeautifulCard(card);
 			if (cardList.size() == 1)
 				visualCard.setBounds(panel.getWidth() / 2 - VisualCard.WIDTH / 2, 0, VisualCard.WIDTH,
 						VisualCard.HEIGHT);

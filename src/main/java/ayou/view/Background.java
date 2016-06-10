@@ -20,7 +20,7 @@ public class Background extends JPanel {
 		setBounds(0, 0, Viewer.SCREEN_WIDTH, Viewer.SCREEN_HEIGHT);
 		try {
 			bg = ImageIO.read(getClass().getResource("/img/" + BACKGROUND_URL));
-			logger.debug("load bg file success");
+			//logger.debug("load bg file success");
 		} catch (Exception e) {
 			logger.error(BACKGROUND_URL + " NOT FOUND ");
 		}

@@ -20,7 +20,7 @@ public class RandomCardFactory {
 		
 		CardEntity card = response.readEntity(CardEntity.class);
 		//new Card(idCard, name, idImg, power, maxHitPoints, canAtk, celerity, healAlly, healAllAllies, buffAlly, buffAllAllies, debuffEnemy, debuffAllEnemies, cout)
-		System.out.println(card);
+		System.out.println(card.getName());
 		return new Card(card.getIdCard(), card.getName(),card.getIdImg(),card.getPower(),card.getMaxHitPoints(),
 				card.isCanAtk(),card.isCelerity(),card.getHealAlly(),card.isHealAllAlly(),card.getBuffAlly(),card.isBuffAllAlly(),card.getDebuffEnemy(),card.isDebuffAllEnemies(),card.getCout());
 	}

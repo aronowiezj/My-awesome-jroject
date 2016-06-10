@@ -9,6 +9,10 @@ public class Card extends Observable {
 	public static final int IMG_SIZE_X = 30;
 	public static final int IMG_SIZE_Y = 30;
 
+	public void setIdImg(String idImg) {
+		this.idImg = idImg;
+	}
+
 	private int idCard;
 	private String name;
 	private String idImg;
